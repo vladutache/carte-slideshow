@@ -19,21 +19,20 @@
             flex-direction: column; 
             align-items: center; 
             width: 100%; 
-            max-width: 98vw; 
+            max-width: 95vw; 
         }
         .book-container {
-            width: 95vw; 
-            height: 85vh;
-            max-width: 1400px;
+            width: 90vw; 
+            height: 75vh; /* Fix la trei sferturi din ecran */
+            max-width: 1200px;
             display: flex; justify-content: center; align-items: center;
-            margin-bottom: 10px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
+            margin-bottom: 15px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
             border-radius: 8px; overflow: hidden; background: #000; cursor: pointer;
         }
-        /* Am schimbat object-fit din contain în cover/fill parțial sau am mărit umplerea */
         .book-video { 
             width: 100%; 
             height: 100%; 
-            object-fit: cover; /* Umple mult mai bine spațiul vizual al casetei */
+            object-fit: contain; /* Păstrează proporțiile originale ale paginii fără să taie din text */
             display: block; 
         }
         
@@ -45,17 +44,17 @@
         }
         .toc-page-content h2 { 
             text-align: center; color: #f5f5f5; margin-top: 0; 
-            font-size: 28px; border-bottom: 1px solid #333; padding-bottom: 15px; 
+            font-size: 26px; border-bottom: 1px solid #333; padding-bottom: 15px; 
         }
         .toc-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-            gap: 12px; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 10px; 
         }
         .toc-item {
-            background: rgba(255,255,255,0.03); padding: 10px 15px; border-radius: 6px;
+            background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 6px;
             cursor: pointer; display: flex; justify-content: space-between; transition: background 0.2s;
-            font-size: 16px; border-bottom: 1px dashed #2a2a2a;
+            font-size: 15px; border-bottom: 1px dashed #2a2a2a;
         }
         .toc-item:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
@@ -75,12 +74,12 @@
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0, 0, 0, 0.95); z-index: 1000; justify-content: center; align-items: center; padding: 10px;
         }
-        .fullscreen-video { width: 100%; height: 100%; object-fit: contain; }
+        .fullscreen-video { max-width: 100%; max-height: 100vh; object-fit: contain; }
         .close-fullscreen {
             position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.2);
             color: #fff; border: none; font-size: 20px; padding: 10px 15px; border-radius: 50%; cursor: pointer; z-index: 1001;
         }
-        .zoom-hint { font-size: 12px; color: #888; margin-top: 4px; text-align: center; }
+        .zoom-hint { font-size: 12px; color: #888; margin-top: 6px; text-align: center; }
     </style>
 </head>
 <body>
