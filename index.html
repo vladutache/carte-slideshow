@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartea mea digitală</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 0;
+            background-color: #0d0d0d; color: #e0e0e0;
+            font-family: 'Georgia', serif;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 100vh; overflow-x: hidden;
+        }
+        .book-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 95vw; }
+        .book-container {
+            max-width: 90vw; max-height: 75vh;
+            display: flex; justify-content: center; align-items: center;
+            margin-bottom: 20px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
+            border-radius: 6px; overflow: hidden; background: #000; cursor: pointer;
+        }
+        .book-video { max-width: 100%; max-height: 75vh; object-fit: contain; display: block; }
+        .controls {
+            display: flex; gap: 15px; align-items: center; flex-wrap: wrap; justify-content: center;
+            background: rgba(255, 255, 255, 0.05); padding: 12px 24px; border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        button, select {
+            background-color: #222; color: #fff; border: 1px solid #444;
+            padding: 8px 16px; font-size: 15px; cursor: pointer; border-radius: 20px; outline: none;
+        }
+        button:hover, select:hover { background-color: #444; border-color: #666; }
+        .page-indicator { font-size: 15px; min-width: 130px; text-align: center; color: #bbb; }
+        .fullscreen-overlay {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.95); z-index: 1000; justify-content: center; align-items: center; padding: 10px;
+        }
+        .fullscreen-video { max-width: 100%; max-height: 100vh; object-fit: contain; }
+        .close-fullscreen {
+            position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.2);
+            color: #fff; border: none; font-size: 20px; padding: 10px 15px; border-radius: 50%; cursor: pointer; z-index: 1001;
+        }
+        .zoom-hint { font-size: 12px; color: #888; margin-top: 8px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="book-wrapper">
+        <div class="book-container" onclick="openFullscreen()">
+            <video id="pageVideo" class="book-video" autoplay playsinline></video>
+        </div>
+        <div class="zoom-hint">🔍 Atinge videoclipul pentru mărire pe tot ecranul</div>
+        <div class="controls" style="margin-top: 15px;">
+            <button onclick="prevPage()">❮ Anteriorul</button>
+            <span id="pageIndicator" class="page-indicator">Copertă</span>
+            <button onclick="nextPage()">Următorul ❯</button>
+            <select id="tocSelect" onchange="jumpToSlide(this.value)">
+                <option value="0">Copertă</option>
+                <option value="1">Pagina de Titlu</option>
+            </select>
+        </div>
+    </div>
+    <div id="fullscreenOverlay" class="fullscreen-overlay" onclick="closeFullscreen(event)">
+        <button class="close-fullscreen">✕</button>
+        <video id="fullscreenVideo" class="fullscreen-video" controls autoplay playsinline></video>
+    </div>
+    <script>
+        const slides = [
+            { title: "Copertă", file: "coperta.mp4" },
+            { title: "Pagina de Titlu", file: "titlu.mp4" }
+        ];
+        for (let i = 1; i <= 44; i++) {
+            slides.push({ title: `Pagina ${i}`, file: `video${i}.mp4` });
+        }
+        slides.push({ title: "Cuprins", file: "cuprins.mp4" });
+
+        let currentIndex = 0;
+        const videoElement = document.getElementById("pageVideo");
+        const fullscreenVideoElement = document.getElementById("fullscreenVideo");
+        const fullscreenOverlay = document.getElementById("fullscreenOverlay");
+        const indicatorElement = document.getElementById("pageIndicator");
+        const selectElement = document.getElementById("tocSelect");
+
+        function initToc() {
+            for (let i = 2; i < slides.length - 1; i++) {
+                let opt = document.createElement("option");
+                opt.value = i; opt.innerText = slides[i].title;
+                selectElement.appendChild(opt);
+            }
+            let optCuprins = document.createElement("option");
+            optCuprins.value = slides.length - 1; optCuprins.innerText = "Cuprins (Final)";
+            selectElement.appendChild(optCuprins);
+        }
+
+        function updateBook() {
+            videoElement.src = slides[currentIndex].file;
+            videoElement.load();
+            videoElement.play().catch(err => console.log("Așteaptă interacțiune", err));
+            if (fullscreenOverlay.style.display === "flex") {
+                fullscreenVideoElement.src = slides[currentIndex].file;
+                fullscreenVideoElement.play();
+            }
+            indicatorElement.innerText = slides[currentIndex].title;
+            selectElement.value = currentIndex;
+        }
+
+        function nextPage() {
+            currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
+            updateBook();
+        }
+
+        function prevPage() {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1;
+            updateBook();
+        }
+
+        function jumpToSlide(index) {
+            currentIndex = parseInt(index);
+            updateBook();
+        }
+
+        function openFullscreen() {
+            fullscreenVideoElement.src = slides[currentIndex].file;
+            fullscreenOverlay.style.display = "flex";
+            fullscreenVideoElement.play();
+        }
+
+        function closeFullscreen(event) {
+            if (!event || event.target === fullscreenOverlay || event.target.tagName === 'BUTTON') {
+                fullscreenOverlay.style.display = "none";
+                fullscreenVideoElement.pause();
+                videoElement.play();
+            }
+        }
+
+        document.addEventListener("keydown", (e) => {
+            if (fullscreenOverlay.style.display === "flex") {
+                if (e.key === "Escape") closeFullscreen();
+                return;
+            }
+            if (e.key === "ArrowRight") nextPage();
+            if (e.key === "ArrowLeft") prevPage();
+        });
+
+        window.onload = function() {
+            initToc();
+            videoElement.src = slides[0].file;
+        };
+    </script>
+</body>
+</html>
