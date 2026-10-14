@@ -7,41 +7,62 @@
     <style>
         * { box-sizing: border-box; }
         body {
-            margin: 0; padding: 0;
+            margin: 0; padding: 10px 0;
             background-color: #0d0d0d; color: #e0e0e0;
             font-family: 'Georgia', serif;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             min-height: 100vh; overflow-x: hidden;
         }
-        .book-wrapper { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 95vw; }
-        .book-container {
-            max-width: 90vw; max-height: 75vh;
-            display: flex; justify-content: center; align-items: center;
-            margin-bottom: 20px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
-            border-radius: 6px; overflow: hidden; background: #000; cursor: pointer;
+        .book-wrapper { 
+            position: relative; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            width: 100%; 
+            max-width: 98vw; 
         }
-        .book-video { max-width: 100%; max-height: 75vh; object-fit: contain; display: block; }
+        .book-container {
+            width: 95vw; 
+            height: 85vh;
+            max-width: 1400px;
+            display: flex; justify-content: center; align-items: center;
+            margin-bottom: 10px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
+            border-radius: 8px; overflow: hidden; background: #000; cursor: pointer;
+        }
+        /* Am schimbat object-fit din contain în cover/fill parțial sau am mărit umplerea */
+        .book-video { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; /* Umple mult mai bine spațiul vizual al casetei */
+            display: block; 
+        }
         
-        /* Stilizare pentru pagina de Cuprins generată direct în pagină */
         .toc-page-content {
             display: none;
-            width: 100%; max-width: 700px; height: 75vh;
-            background: #161616; border: 1px solid #333; border-radius: 6px;
+            width: 100%; height: 100%;
+            background: #161616; border: 1px solid #333; border-radius: 8px;
             padding: 30px; overflow-y: auto; text-align: left;
         }
-        .toc-page-content h2 { text-align: center; color: #f5f5f5; margin-top: 0; font-size: 24px; border-bottom: 1px solid #333; padding-bottom: 15px; }
-        .toc-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
-        .toc-item {
-            background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 4px;
-            cursor: pointer; display: flex; justify-content: space-between; transition: background 0.2s;
-            font-size: 15px; border-bottom: 1px dashed #2a2a2a;
+        .toc-page-content h2 { 
+            text-align: center; color: #f5f5f5; margin-top: 0; 
+            font-size: 28px; border-bottom: 1px solid #333; padding-bottom: 15px; 
         }
-        .toc-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
+        .toc-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 12px; 
+        }
+        .toc-item {
+            background: rgba(255,255,255,0.03); padding: 10px 15px; border-radius: 6px;
+            cursor: pointer; display: flex; justify-content: space-between; transition: background 0.2s;
+            font-size: 16px; border-bottom: 1px dashed #2a2a2a;
+        }
+        .toc-item:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
         .controls {
             display: flex; gap: 15px; align-items: center; flex-wrap: wrap; justify-content: center;
-            background: rgba(255, 255, 255, 0.05); padding: 12px 24px; border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 15px;
+            background: rgba(255, 255, 255, 0.05); padding: 10px 20px; border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 5px;
         }
         button, select {
             background-color: #222; color: #fff; border: 1px solid #444;
@@ -54,12 +75,12 @@
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0, 0, 0, 0.95); z-index: 1000; justify-content: center; align-items: center; padding: 10px;
         }
-        .fullscreen-video { max-width: 100%; max-height: 100vh; object-fit: contain; }
+        .fullscreen-video { width: 100%; height: 100%; object-fit: contain; }
         .close-fullscreen {
             position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.2);
             color: #fff; border: none; font-size: 20px; padding: 10px 15px; border-radius: 50%; cursor: pointer; z-index: 1001;
         }
-        .zoom-hint { font-size: 12px; color: #888; margin-top: 8px; text-align: center; }
+        .zoom-hint { font-size: 12px; color: #888; margin-top: 4px; text-align: center; }
     </style>
 </head>
 <body>
@@ -90,7 +111,6 @@
     </div>
 
     <script>
-        // Lista exactă a poeziilor extrase din volumul tău
         const poemTitles = [
             "Cuvânt înainte", "Vasul", "Stația", "Balaurul", "Ecouri", "Țărmuri", "Siluete", 
             "Drumuri de munte", "Lacrima", "Șevalet", "Floarea Soarelui", "Flori de gheață", 
@@ -106,13 +126,11 @@
             { title: "Pagina de Titlu", file: "titlu.mp4", type: "video" }
         ];
 
-        // Adăugăm paginile video de la 1 la 44 cu titlurile corespunzătoare
         for (let i = 1; i <= 44; i++) {
             let titleName = poemTitles[i-1] ? `P. ${i}: ${poemTitles[i-1]}` : `Pagina ${i}`;
             slides.push({ title: titleName, file: `video${i}.mp4`, type: "video" });
         }
 
-        // Adăugăm pagina de Cuprins interactiv la final
         slides.push({ title: "Cuprins", type: "toc" });
 
         let currentIndex = 0;
@@ -127,7 +145,6 @@
         const tocGridList = document.getElementById("tocGridList");
 
         function initToc() {
-            // Meniul derulant
             for (let i = 2; i < slides.length - 1; i++) {
                 let opt = document.createElement("option");
                 opt.value = i; opt.innerText = slides[i].title;
@@ -137,9 +154,8 @@
             optCuprins.value = slides.length - 1; optCuprins.innerText = "Cuprins (Final)";
             selectElement.appendChild(optCuprins);
 
-            // Generarea listei vizuale din pagina de cuprins
             poemTitles.forEach((title, idx) => {
-                let slideIndex = idx + 2; // pentru că primele 2 sunt Copertă și Titlu
+                let slideIndex = idx + 2;
                 let div = document.createElement("div");
                 div.className = "toc-item";
                 div.innerHTML = `<span>${idx + 1}. ${title}</span> <span>➔</span>`;
@@ -156,7 +172,6 @@
                 tocContentDiv.style.display = "block";
                 bookContainer.style.cursor = "default";
                 zoomHint.style.visibility = "hidden";
-                // Dacă aveai un audio de fundal pentru cuprins, poți rula ceva opțional, aici oprim videoclipul
                 videoElement.pause();
             } else {
                 tocContentDiv.style.display = "none";
@@ -194,7 +209,7 @@
         }
 
         function openFullscreen() {
-            if (slides[currentIndex].type === "toc") return; // Nu dăm zoom pe cuprinsul text
+            if (slides[currentIndex].type === "toc") return;
             fullscreenVideoElement.src = slides[currentIndex].file;
             fullscreenOverlay.style.display = "flex";
             fullscreenVideoElement.play();
