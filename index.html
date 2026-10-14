@@ -3,42 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cartea mea digitală</title>
+    <title>Sufletul țărmurilor — Vlad Opran</title>
     <style>
         * { box-sizing: border-box; }
         body {
-            margin: 0; padding: 10px 0;
-            background-color: #0d0d0d; color: #e0e0e0;
+            margin: 0; padding: 0;
+            background-color: #0b0b0c; color: #d6d6d6;
             font-family: 'Georgia', serif;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             min-height: 100vh; overflow-x: hidden;
         }
-        .book-wrapper { 
-            position: relative; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            width: 100%; 
-            max-width: 95vw; 
+
+        /* --- PAGINA DE ÎNTÂMPINARE (LANDING PAGE) --- */
+        #landingPage {
+            display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+            width: 95vw; max-width: 1200px; height: 90vh;
+            background: #111113; border: 1px solid #222; border-radius: 12px;
+            padding: 30px 20px; box-shadow: 0 15px 45px rgba(0,0,0,0.8);
+            text-align: center; position: relative;
         }
+
+        .landing-title {
+            font-size: 32px; font-weight: normal; letter-spacing: 3px;
+            color: #f0f0f0; margin: 0; font-style: italic;
+            border-bottom: 1px solid #26262a; padding-bottom: 15px; width: 100%;
+        }
+
+        /* Zona centrală cu desenul în creion / semilună și poetul */
+        .artwork-container {
+            flex: 1; width: 100%; display: flex; justify-content: center; align-items: center;
+            position: relative; margin: 15px 0;
+        }
+        .pencil-art {
+            max-height: 100%; max-width: 100%; object-fit: contain;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.05));
+        }
+
+        /* Cele 3 rubrici principale */
+        .landing-nav {
+            display: flex; gap: 20px; justify-content: center; width: 100%;
+            padding-top: 15px; border-top: 1px solid #26262a; flex-wrap: wrap;
+        }
+        .nav-btn {
+            background: #1c1c20; color: #e0e0e0; border: 1px solid #333;
+            padding: 12px 28px; font-size: 16px; font-family: 'Georgia', serif;
+            cursor: pointer; border-radius: 25px; transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+        .nav-btn:hover {
+            background: #2a2a30; border-color: #555; color: #fff;
+            transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        /* --- INTERFAȚA CĂRȚII (PLAYER VIDEO & CUPRINS) --- */
+        #bookApp {
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            width: 100%; max-width: 95vw; animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
         .book-container {
-            width: 90vw; 
-            height: 75vh; /* Fix la trei sferturi din ecran */
-            max-width: 1200px;
+            width: 90vw; height: 75vh; max-width: 1200px;
             display: flex; justify-content: center; align-items: center;
             margin-bottom: 15px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
             border-radius: 8px; overflow: hidden; background: #000; cursor: pointer;
+            position: relative;
         }
-        .book-video { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: contain; /* Păstrează proporțiile originale ale paginii fără să taie din text */
-            display: block; 
-        }
+        .book-video { width: 100%; height: 100%; object-fit: contain; display: block; }
         
         .toc-page-content {
-            display: none;
-            width: 100%; height: 100%;
+            display: none; width: 100%; height: 100%;
             background: #161616; border: 1px solid #333; border-radius: 8px;
             padding: 30px; overflow-y: auto; text-align: left;
         }
@@ -47,9 +81,7 @@
             font-size: 26px; border-bottom: 1px solid #333; padding-bottom: 15px; 
         }
         .toc-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-            gap: 10px; 
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; 
         }
         .toc-item {
             background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 6px;
@@ -66,6 +98,7 @@
         button, select {
             background-color: #222; color: #fff; border: 1px solid #444;
             padding: 8px 16px; font-size: 15px; cursor: pointer; border-radius: 20px; outline: none;
+            font-family: 'Georgia', serif;
         }
         button:hover, select:hover { background-color: #444; border-color: #666; }
         .page-indicator { font-size: 15px; min-width: 130px; text-align: center; color: #bbb; }
@@ -80,10 +113,93 @@
             color: #fff; border: none; font-size: 20px; padding: 10px 15px; border-radius: 50%; cursor: pointer; z-index: 1001;
         }
         .zoom-hint { font-size: 12px; color: #888; margin-top: 6px; text-align: center; }
+
+        /* --- SECȚIUNI SECUNDARE (Despre Autor & Bibliotecă) --- */
+        .sub-section {
+            display: none; width: 90vw; max-width: 1000px; height: 80vh;
+            background: #121215; border: 1px solid #2a2a30; border-radius: 10px;
+            padding: 40px; overflow-y: auto; text-align: left; position: relative;
+        }
+        .sub-section h2 { font-size: 28px; border-bottom: 1px solid #333; padding-bottom: 12px; margin-top: 0; color: #eee; }
+        .back-home-btn {
+            margin-bottom: 20px; background: #222; border: 1px solid #444; color: #ccc;
+            padding: 6px 16px; border-radius: 15px; cursor: pointer; font-size: 14px;
+        }
+        .back-home-btn:hover { background: #333; color: #fff; }
     </style>
 </head>
 <body>
-    <div class="book-wrapper">
+
+    <!-- PAGINA DE ÎNTÂMPINARE -->
+    <div id="landingPage">
+        <h1 class="landing-title">Sufletul țărmurilor</h1>
+        
+        <div class="artwork-container">
+            <!-- Desen în creion reprezentat grafic printr-o compoziție fină de schiță (Pierrot melancolic pe semilună) -->
+            <svg class="pencil-art" viewBox="0 0 800 600" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <style>
+                    .sketch-stroke { fill: none; stroke: #b8b8b8; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: 0.85; }
+                    .sketch-fill { fill: #1c1c20; stroke: #b8b8b8; stroke-width: 1.2; }
+                    .star { fill: #d0d0d0; opacity: 0.6; }
+                </style>
+                <!-- Fundal subtil texturat de hârtie -->
+                <rect width="800" height="600" fill="#111113"/>
+                
+                <!-- Stele discrete în creion -->
+                <circle cx="150" cy="100" r="1.5" class="star"/>
+                <circle cx="280" cy="70" r="1" class="star"/>
+                <circle cx="650" cy="120" r="2" class="star"/>
+                <circle cx="700" cy="250" r="1" class="star"/>
+                <circle cx="100" cy="300" r="1.5" class="star"/>
+
+                <!-- Semiluna fină -->
+                <path d="M 450,120 Q 300,180 340,380 Q 370,520 520,480 Q 380,450 390,300 Q 400,150 450,120 Z" class="sketch-fill"/>
+                
+                <!-- Poetul / Adolescentul visător stând pe semilună -->
+                <!-- Corpul și haina simplă, romantică -->
+                <path d="M 405,295 C 385,310 360,340 345,380 L 365,400 C 380,360 405,330 420,315 Z" class="sketch-stroke"/>
+                <!-- Capul și pletele -->
+                <circle cx="390" cy="275" r="18" class="sketch-stroke"/>
+                <path d="M 375,270 Q 385,250 405,265" class="sketch-stroke"/>
+                <!-- Picioarele care atârnă liber -->
+                <path d="M 355,390 L 330,460 L 320,510" class="sketch-stroke"/>
+                <path d="M 365,395 L 345,465 L 340,515" class="sketch-stroke"/>
+                <!-- Pantofi simpli -->
+                <ellipse cx="318" cy="515" rx="8" ry="4" class="sketch-stroke"/>
+                <ellipse cx="338" cy="520" rx="8" ry="4" class="sketch-stroke"/>
+                
+                <!-- Mâna sprijinită ușor -->
+                <path d="M 410,315 Q 430,330 440,350" class="sketch-stroke"/>
+            </svg>
+        </div>
+
+        <div class="landing-nav">
+            <button class="nav-btn" onclick="showSection('aboutSection')">Despre autor</button>
+            <button class="nav-btn" onclick="showBookApp()">Redă</button>
+            <button class="nav-btn" onclick="showSection('librarySection')">Bibliotecă</button>
+        </div>
+    </div>
+
+    <!-- SECȚIUNEA: DESPRE AUTOR -->
+    <div id="aboutSection" class="sub-section">
+        <button class="back-home-btn" onclick="showLanding()">❮ Înapoi</button>
+        <h2>Despre autor</h2>
+        <p>Vlad Opran este un autor și poet preocupat de armonia clasică a formelor, versul măsurat și nuanțele subtile ale imagisticii urbane și nocturne.</p>
+        <p>Volumul „Sufletul țărmurilor” reunește o serie de meditații lirice trans puse în imagini și sunet.</p>
+    </div>
+
+    <!-- SECȚIUNEA: BIBLIOTECĂ (Poezii și clipuri extra) -->
+    <div id="librarySection" class="sub-section">
+        <button class="back-home-btn" onclick="showLanding()">❮ Înapoi</button>
+        <h2>Bibliotecă</h2>
+        <p>Aici vor fi găzduite poezii, înregistrări și materiale suplimentare care nu fac parte direct din volumul principal.</p>
+        <p style="color: #777; font-style: italic;">(În curând vor fi adăugate clipuri și texte noi)</p>
+    </div>
+
+    <!-- APLICAȚIA PRINCIPALĂ: CARTEA DIGITALĂ (VIDEO + CUPRINS) -->
+    <div id="bookApp">
+        <button class="back-home-btn" onclick="showLanding()" style="align-self: flex-start; margin-bottom: 10px;">❮ Înapoi la început</button>
+        
         <div class="book-container" id="bookContainer" onclick="openFullscreen()">
             <video id="pageVideo" class="book-video" autoplay playsinline></video>
             <div id="tocContentDiv" class="toc-page-content">
@@ -110,6 +226,35 @@
     </div>
 
     <script>
+        const landingPage = document.getElementById("landingPage");
+        const bookApp = document.getElementById("bookApp");
+        const aboutSection = document.getElementById("aboutSection");
+        const librarySection = document.getElementById("librarySection");
+
+        function showLanding() {
+            landingPage.style.display = "flex";
+            bookApp.style.display = "none";
+            aboutSection.style.display = "none";
+            librarySection.style.display = "none";
+            document.getElementById("pageVideo").pause();
+        }
+
+        function showBookApp() {
+            landingPage.style.display = "none";
+            aboutSection.style.display = "none";
+            librarySection.style.display = "none";
+            bookApp.style.display = "flex";
+            updateBook();
+        }
+
+        function showSection(sectionId) {
+            landingPage.style.display = "none";
+            bookApp.style.display = "none";
+            aboutSection.style.display = "none";
+            librarySection.style.display = "none";
+            document.getElementById(sectionId).style.display = "block";
+        }
+
         const poemTitles = [
             "Cuvânt înainte", "Vasul", "Stația", "Balaurul", "Ecouri", "Țărmuri", "Siluete", 
             "Drumuri de munte", "Lacrima", "Șevalet", "Floarea Soarelui", "Flori de gheață", 
@@ -227,13 +372,14 @@
                 if (e.key === "Escape") closeFullscreen();
                 return;
             }
-            if (e.key === "ArrowRight") nextPage();
-            if (e.key === "ArrowLeft") prevPage();
+            if (bookApp.style.display === "flex") {
+                if (e.key === "ArrowRight") nextPage();
+                if (e.key === "ArrowLeft") prevPage();
+            }
         });
 
         window.onload = function() {
             initToc();
-            updateBook();
         };
     </script>
 </body>
