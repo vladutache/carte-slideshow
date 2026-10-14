@@ -21,10 +21,27 @@
             border-radius: 6px; overflow: hidden; background: #000; cursor: pointer;
         }
         .book-video { max-width: 100%; max-height: 75vh; object-fit: contain; display: block; }
+        
+        /* Stilizare pentru pagina de Cuprins generată direct în pagină */
+        .toc-page-content {
+            display: none;
+            width: 100%; max-width: 700px; height: 75vh;
+            background: #161616; border: 1px solid #333; border-radius: 6px;
+            padding: 30px; overflow-y: auto; text-align: left;
+        }
+        .toc-page-content h2 { text-align: center; color: #f5f5f5; margin-top: 0; font-size: 24px; border-bottom: 1px solid #333; padding-bottom: 15px; }
+        .toc-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+        .toc-item {
+            background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 4px;
+            cursor: pointer; display: flex; justify-content: space-between; transition: background 0.2s;
+            font-size: 15px; border-bottom: 1px dashed #2a2a2a;
+        }
+        .toc-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
+
         .controls {
             display: flex; gap: 15px; align-items: center; flex-wrap: wrap; justify-content: center;
             background: rgba(255, 255, 255, 0.05); padding: 12px 24px; border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 15px;
         }
         button, select {
             background-color: #222; color: #fff; border: 1px solid #444;
@@ -32,6 +49,7 @@
         }
         button:hover, select:hover { background-color: #444; border-color: #666; }
         .page-indicator { font-size: 15px; min-width: 130px; text-align: center; color: #bbb; }
+        
         .fullscreen-overlay {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0, 0, 0, 0.95); z-index: 1000; justify-content: center; align-items: center; padding: 10px;
@@ -46,11 +64,16 @@
 </head>
 <body>
     <div class="book-wrapper">
-        <div class="book-container" onclick="openFullscreen()">
+        <div class="book-container" id="bookContainer" onclick="openFullscreen()">
             <video id="pageVideo" class="book-video" autoplay playsinline></video>
+            <div id="tocContentDiv" class="toc-page-content">
+                <h2>CUPRINS</h2>
+                <div id="tocGridList" class="toc-grid"></div>
+            </div>
         </div>
-        <div class="zoom-hint">🔍 Atinge videoclipul pentru mărire pe tot ecranul</div>
-        <div class="controls" style="margin-top: 15px;">
+        <div class="zoom-hint" id="zoomHint">🔍 Atinge videoclipul pentru mărire pe tot ecranul</div>
+        
+        <div class="controls">
             <button onclick="prevPage()">❮ Anteriorul</button>
             <span id="pageIndicator" class="page-indicator">Copertă</span>
             <button onclick="nextPage()">Următorul ❯</button>
@@ -60,28 +83,51 @@
             </select>
         </div>
     </div>
+
     <div id="fullscreenOverlay" class="fullscreen-overlay" onclick="closeFullscreen(event)">
         <button class="close-fullscreen">✕</button>
         <video id="fullscreenVideo" class="fullscreen-video" controls autoplay playsinline></video>
     </div>
+
     <script>
-        const slides = [
-            { title: "Copertă", file: "coperta.mp4" },
-            { title: "Pagina de Titlu", file: "titlu.mp4" }
+        // Lista exactă a poeziilor extrase din volumul tău
+        const poemTitles = [
+            "Cuvânt înainte", "Vasul", "Stația", "Balaurul", "Ecouri", "Țărmuri", "Siluete", 
+            "Drumuri de munte", "Lacrima", "Șevalet", "Floarea Soarelui", "Flori de gheață", 
+            "Gânduri", "La fereastră", "Orizont", "Înserare", "Melancolie", "Urbană", 
+            "Nocturnă", "Amfora", "Primăvară", "Hibernală", "Ungher", "Era noastră", 
+            "Aurea mediocritas", "Panta rei", "Evrika", "Q.E.D.", "Copilărie", "O, tempora", 
+            "Sic transit", "Fumuri", "Stenahorie", "Jazz", "Orizont temporal", "Ecoul", 
+            "Pastel", "Salon", "Călător", "Sonet alb", "Steaua", "Luceafăr", "Epitaf", "Postcard"
         ];
+
+        const slides = [
+            { title: "Copertă", file: "coperta.mp4", type: "video" },
+            { title: "Pagina de Titlu", file: "titlu.mp4", type: "video" }
+        ];
+
+        // Adăugăm paginile video de la 1 la 44 cu titlurile corespunzătoare
         for (let i = 1; i <= 44; i++) {
-            slides.push({ title: `Pagina ${i}`, file: `video${i}.mp4` });
+            let titleName = poemTitles[i-1] ? `P. ${i}: ${poemTitles[i-1]}` : `Pagina ${i}`;
+            slides.push({ title: titleName, file: `video${i}.mp4`, type: "video" });
         }
-        slides.push({ title: "Cuprins", file: "cuprins.mp4" });
+
+        // Adăugăm pagina de Cuprins interactiv la final
+        slides.push({ title: "Cuprins", type: "toc" });
 
         let currentIndex = 0;
         const videoElement = document.getElementById("pageVideo");
+        const tocContentDiv = document.getElementById("tocContentDiv");
+        const bookContainer = document.getElementById("bookContainer");
+        const zoomHint = document.getElementById("zoomHint");
         const fullscreenVideoElement = document.getElementById("fullscreenVideo");
         const fullscreenOverlay = document.getElementById("fullscreenOverlay");
         const indicatorElement = document.getElementById("pageIndicator");
         const selectElement = document.getElementById("tocSelect");
+        const tocGridList = document.getElementById("tocGridList");
 
         function initToc() {
+            // Meniul derulant
             for (let i = 2; i < slides.length - 1; i++) {
                 let opt = document.createElement("option");
                 opt.value = i; opt.innerText = slides[i].title;
@@ -90,17 +136,45 @@
             let optCuprins = document.createElement("option");
             optCuprins.value = slides.length - 1; optCuprins.innerText = "Cuprins (Final)";
             selectElement.appendChild(optCuprins);
+
+            // Generarea listei vizuale din pagina de cuprins
+            poemTitles.forEach((title, idx) => {
+                let slideIndex = idx + 2; // pentru că primele 2 sunt Copertă și Titlu
+                let div = document.createElement("div");
+                div.className = "toc-item";
+                div.innerHTML = `<span>${idx + 1}. ${title}</span> <span>➔</span>`;
+                div.onclick = () => jumpToSlide(slideIndex);
+                tocGridList.appendChild(div);
+            });
         }
 
         function updateBook() {
-            videoElement.src = slides[currentIndex].file;
-            videoElement.load();
-            videoElement.play().catch(err => console.log("Așteaptă interacțiune", err));
-            if (fullscreenOverlay.style.display === "flex") {
-                fullscreenVideoElement.src = slides[currentIndex].file;
-                fullscreenVideoElement.play();
+            let currentSlide = slides[currentIndex];
+
+            if (currentSlide.type === "toc") {
+                videoElement.style.display = "none";
+                tocContentDiv.style.display = "block";
+                bookContainer.style.cursor = "default";
+                zoomHint.style.visibility = "hidden";
+                // Dacă aveai un audio de fundal pentru cuprins, poți rula ceva opțional, aici oprim videoclipul
+                videoElement.pause();
+            } else {
+                tocContentDiv.style.display = "none";
+                videoElement.style.display = "block";
+                bookContainer.style.cursor = "pointer";
+                zoomHint.style.visibility = "visible";
+
+                videoElement.src = currentSlide.file;
+                videoElement.load();
+                videoElement.play().catch(err => console.log("Așteaptă interacțiune", err));
+                
+                if (fullscreenOverlay.style.display === "flex") {
+                    fullscreenVideoElement.src = currentSlide.file;
+                    fullscreenVideoElement.play();
+                }
             }
-            indicatorElement.innerText = slides[currentIndex].title;
+
+            indicatorElement.innerText = currentSlide.title;
             selectElement.value = currentIndex;
         }
 
@@ -120,6 +194,7 @@
         }
 
         function openFullscreen() {
+            if (slides[currentIndex].type === "toc") return; // Nu dăm zoom pe cuprinsul text
             fullscreenVideoElement.src = slides[currentIndex].file;
             fullscreenOverlay.style.display = "flex";
             fullscreenVideoElement.play();
@@ -144,7 +219,7 @@
 
         window.onload = function() {
             initToc();
-            videoElement.src = slides[0].file;
+            updateBook();
         };
     </script>
 </body>
