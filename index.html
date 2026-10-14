@@ -29,17 +29,15 @@
             border-bottom: 1px solid #26262a; padding-bottom: 15px; width: 100%;
         }
 
-        /* Zona centrală cu desenul în creion / semilună și poetul */
         .artwork-container {
             flex: 1; width: 100%; display: flex; justify-content: center; align-items: center;
-            position: relative; margin: 15px 0;
+            position: relative; margin: 10px 0;
         }
         .pencil-art {
             max-height: 100%; max-width: 100%; object-fit: contain;
-            filter: drop-shadow(0 0 15px rgba(255,255,255,0.05));
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.04));
         }
 
-        /* Cele 3 rubrici principale */
         .landing-nav {
             display: flex; gap: 20px; justify-content: center; width: 100%;
             padding-top: 15px; border-top: 1px solid #26262a; flex-wrap: wrap;
@@ -66,7 +64,7 @@
             width: 90vw; height: 75vh; max-width: 1200px;
             display: flex; justify-content: center; align-items: center;
             margin-bottom: 15px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
-            border-radius: 8px; overflow: hidden; background: #000; cursor: pointer;
+            border-radius: 8px; overflow: hidden; background: #000;
             position: relative;
         }
         .book-video { width: 100%; height: 100%; object-fit: contain; display: block; }
@@ -102,19 +100,8 @@
         }
         button:hover, select:hover { background-color: #444; border-color: #666; }
         .page-indicator { font-size: 15px; min-width: 130px; text-align: center; color: #bbb; }
-        
-        .fullscreen-overlay {
-            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.95); z-index: 1000; justify-content: center; align-items: center; padding: 10px;
-        }
-        .fullscreen-video { max-width: 100%; max-height: 100vh; object-fit: contain; }
-        .close-fullscreen {
-            position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.2);
-            color: #fff; border: none; font-size: 20px; padding: 10px 15px; border-radius: 50%; cursor: pointer; z-index: 1001;
-        }
-        .zoom-hint { font-size: 12px; color: #888; margin-top: 6px; text-align: center; }
 
-        /* --- SECȚIUNI SECUNDARE (Despre Autor & Bibliotecă) --- */
+        /* --- SECȚIUNI SECUNDARE --- */
         .sub-section {
             display: none; width: 90vw; max-width: 1000px; height: 80vh;
             background: #121215; border: 1px solid #2a2a30; border-radius: 10px;
@@ -135,41 +122,69 @@
         <h1 class="landing-title">Sufletul țărmurilor</h1>
         
         <div class="artwork-container">
-            <!-- Desen în creion reprezentat grafic printr-o compoziție fină de schiță (Pierrot melancolic pe semilună) -->
-            <svg class="pencil-art" viewBox="0 0 800 600" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <style>
-                    .sketch-stroke { fill: none; stroke: #b8b8b8; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: 0.85; }
-                    .sketch-fill { fill: #1c1c20; stroke: #b8b8b8; stroke-width: 1.2; }
-                    .star { fill: #d0d0d0; opacity: 0.6; }
-                </style>
-                <!-- Fundal subtil texturat de hârtie -->
-                <rect width="800" height="600" fill="#111113"/>
+            <!-- Ilustrație în creion substanțială: Poet melancolic pe semilună, cu tușe artistice fine de grafit -->
+            <svg class="pencil-art" viewBox="0 0 900 650" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.08"/>
+                        <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+                    </radialGradient>
+                </defs>
+                <rect width="900" height="650" fill="#111113"/>
                 
-                <!-- Stele discrete în creion -->
-                <circle cx="150" cy="100" r="1.5" class="star"/>
-                <circle cx="280" cy="70" r="1" class="star"/>
-                <circle cx="650" cy="120" r="2" class="star"/>
-                <circle cx="700" cy="250" r="1" class="star"/>
-                <circle cx="100" cy="300" r="1.5" class="star"/>
+                <!-- Fundal: Cer nocturn cu stele subtile desenate mărunt -->
+                <g stroke="#a0a0a0" stroke-width="0.8" opacity="0.6">
+                    <circle cx="120" cy="90" r="1.5" fill="#e0e0e0"/>
+                    <circle cx="280" cy="130" r="1" fill="#e0e0e0"/>
+                    <circle cx="750" cy="100" r="2" fill="#e0e0e0"/>
+                    <circle cx="820" cy="220" r="1.2" fill="#e0e0e0"/>
+                    <circle cx="150" cy="280" r="1" fill="#e0e0e0"/>
+                    <circle cx="780" cy="480" r="1.5" fill="#e0e0e0"/>
+                    <!-- Câteva constelații discrete / linii de schiță -->
+                    <line x1="120" y1="90" x2="160" y2="120" opacity="0.3"/>
+                    <line x1="750" cy="100" x2="820" y2="220" opacity="0.2"/>
+                </g>
 
-                <!-- Semiluna fină -->
-                <path d="M 450,120 Q 300,180 340,380 Q 370,520 520,480 Q 380,450 390,300 Q 400,150 450,120 Z" class="sketch-fill"/>
-                
-                <!-- Poetul / Adolescentul visător stând pe semilună -->
-                <!-- Corpul și haina simplă, romantică -->
-                <path d="M 405,295 C 385,310 360,340 345,380 L 365,400 C 380,360 405,330 420,315 Z" class="sketch-stroke"/>
-                <!-- Capul și pletele -->
-                <circle cx="390" cy="275" r="18" class="sketch-stroke"/>
-                <path d="M 375,270 Q 385,250 405,265" class="sketch-stroke"/>
-                <!-- Picioarele care atârnă liber -->
-                <path d="M 355,390 L 330,460 L 320,510" class="sketch-stroke"/>
-                <path d="M 365,395 L 345,465 L 340,515" class="sketch-stroke"/>
-                <!-- Pantofi simpli -->
-                <ellipse cx="318" cy="515" rx="8" ry="4" class="sketch-stroke"/>
-                <ellipse cx="338" cy="520" rx="8" ry="4" class="sketch-stroke"/>
-                
-                <!-- Mâna sprijinită ușor -->
-                <path d="M 410,315 Q 430,330 440,350" class="sketch-stroke"/>
+                <!-- Halou fin în jurul lunii -->
+                <circle cx="480" cy="240" r="220" fill="url(#moonGlow)"/>
+
+                <!-- SEMILUNA SUBȚIRE ȘI TEXTURATĂ ARTISTIC -->
+                <path d="M 500,80 Q 320,130 360,370 Q 390,520 560,490 Q 420,440 430,290 Q 440,140 500,80 Z" 
+                      fill="#1b1b20" stroke="#c0c0c0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Umbre interioare de grafit pe semilună -->
+                <path d="M 375,350 Q 410,430 520,460" fill="none" stroke="#8a8a92" stroke-width="1.2" opacity="0.5" stroke-dasharray="3,3"/>
+                <path d="M 390,250 Q 410,310 425,380" fill="none" stroke="#7a7a82" stroke-width="1" opacity="0.4"/>
+
+                <!-- POETUL / ADOLESCENTUL MELANCOLIC STÂND PE LUNĂ -->
+                <g stroke="#d0d0d6" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Trunchiul și haina romantică fluidă -->
+                    <path d="M 425,290 C 405,305 380,335 365,375 L 385,395 C 400,355 425,325 440,310 Z" fill="#18181d"/>
+                    <path d="M 375,370 C 370,390 360,415 350,435" opacity="0.8"/> <!-- cute pe haine -->
+                    
+                    <!-- Capul și pletele fine -->
+                    <circle cx="410" cy="268" r="17" fill="#18181d"/>
+                    <!-- Păr / Plete bogate specifice unui poet -->
+                    <path d="M 395,265 C 390,250 405,245 420,255 C 428,248 435,260 430,272" fill="#25252b"/>
+                    
+                    <!-- Gâtul și gulerul cămășii -->
+                    <path d="M 406,285 L 414,285"/>
+                    
+                    <!-- Picioarele care atârnă liber în aer -->
+                    <path d="M 375,385 L 345,460 L 335,525"/>
+                    <path d="M 385,390 L 360,465 L 355,530"/>
+                    
+                    <!-- Pantofi clasici / Ghete ușoare de poet -->
+                    <path d="M 325,523 Q 335,532 342,525" fill="#2a2a30"/>
+                    <path d="M 345,528 Q 355,538 362,530" fill="#2a2a30"/>
+
+                    <!-- Brațul sprijinit relaxat, ținând eventual un mic pergament sau o pană simbolică -->
+                    <path d="M 432,310 Q 455,325 465,350"/>
+                    <path d="M 465,350 L 475,360"/>
+                </g>
+
+                <!-- Schițe suplimentare de fundal (păsări/rândunici stilizate în zbor îndepărtat, tușe de creion) -->
+                <path d="M 220,180 Q 230,170 240,180 Q 250,170 260,180" fill="none" stroke="#9a9a9a" stroke-width="1" opacity="0.4"/>
+                <path d="M 235,190 Q 242,183 250,190" fill="none" stroke="#9a9a9a" stroke-width="0.8" opacity="0.3"/>
             </svg>
         </div>
 
@@ -185,10 +200,10 @@
         <button class="back-home-btn" onclick="showLanding()">❮ Înapoi</button>
         <h2>Despre autor</h2>
         <p>Vlad Opran este un autor și poet preocupat de armonia clasică a formelor, versul măsurat și nuanțele subtile ale imagisticii urbane și nocturne.</p>
-        <p>Volumul „Sufletul țărmurilor” reunește o serie de meditații lirice trans puse în imagini și sunet.</p>
+        <p>Volumul „Sufletul țărmurilor” reunește o serie de meditații lirice transpuse în imagini și sunet.</p>
     </div>
 
-    <!-- SECȚIUNEA: BIBLIOTECĂ (Poezii și clipuri extra) -->
+    <!-- SECȚIUNEA: BIBLIOTECĂ -->
     <div id="librarySection" class="sub-section">
         <button class="back-home-btn" onclick="showLanding()">❮ Înapoi</button>
         <h2>Bibliotecă</h2>
@@ -196,18 +211,18 @@
         <p style="color: #777; font-style: italic;">(În curând vor fi adăugate clipuri și texte noi)</p>
     </div>
 
-    <!-- APLICAȚIA PRINCIPALĂ: CARTEA DIGITALĂ (VIDEO + CUPRINS) -->
+    <!-- APLICAȚIA PRINCIPALĂ: CARTEA DIGITALĂ -->
     <div id="bookApp">
         <button class="back-home-btn" onclick="showLanding()" style="align-self: flex-start; margin-bottom: 10px;">❮ Înapoi la început</button>
         
-        <div class="book-container" id="bookContainer" onclick="openFullscreen()">
-            <video id="pageVideo" class="book-video" autoplay playsinline></video>
+        <div class="book-container">
+            <!-- Am adăugat atributele 'controls' pentru a asigura controlul complet pe pauză, play și volum -->
+            <video id="pageVideo" class="book-video" controls playsinline preload="auto"></video>
             <div id="tocContentDiv" class="toc-page-content">
                 <h2>CUPRINS</h2>
                 <div id="tocGridList" class="toc-grid"></div>
             </div>
         </div>
-        <div class="zoom-hint" id="zoomHint">🔍 Atinge videoclipul pentru mărire pe tot ecranul</div>
         
         <div class="controls">
             <button onclick="prevPage()">❮ Anteriorul</button>
@@ -218,11 +233,6 @@
                 <option value="1">Pagina de Titlu</option>
             </select>
         </div>
-    </div>
-
-    <div id="fullscreenOverlay" class="fullscreen-overlay" onclick="closeFullscreen(event)">
-        <button class="close-fullscreen">✕</button>
-        <video id="fullscreenVideo" class="fullscreen-video" controls autoplay playsinline></video>
     </div>
 
     <script>
@@ -280,10 +290,6 @@
         let currentIndex = 0;
         const videoElement = document.getElementById("pageVideo");
         const tocContentDiv = document.getElementById("tocContentDiv");
-        const bookContainer = document.getElementById("bookContainer");
-        const zoomHint = document.getElementById("zoomHint");
-        const fullscreenVideoElement = document.getElementById("fullscreenVideo");
-        const fullscreenOverlay = document.getElementById("fullscreenOverlay");
         const indicatorElement = document.getElementById("pageIndicator");
         const selectElement = document.getElementById("tocSelect");
         const tocGridList = document.getElementById("tocGridList");
@@ -314,23 +320,14 @@
             if (currentSlide.type === "toc") {
                 videoElement.style.display = "none";
                 tocContentDiv.style.display = "block";
-                bookContainer.style.cursor = "default";
-                zoomHint.style.visibility = "hidden";
                 videoElement.pause();
             } else {
                 tocContentDiv.style.display = "none";
                 videoElement.style.display = "block";
-                bookContainer.style.cursor = "pointer";
-                zoomHint.style.visibility = "visible";
 
                 videoElement.src = currentSlide.file;
                 videoElement.load();
-                videoElement.play().catch(err => console.log("Așteaptă interacțiune", err));
-                
-                if (fullscreenOverlay.style.display === "flex") {
-                    fullscreenVideoElement.src = currentSlide.file;
-                    fullscreenVideoElement.play();
-                }
+                videoElement.play().catch(err => console.log("Redarea automată a necesitat permisiune", err));
             }
 
             indicatorElement.innerText = currentSlide.title;
@@ -352,27 +349,8 @@
             updateBook();
         }
 
-        function openFullscreen() {
-            if (slides[currentIndex].type === "toc") return;
-            fullscreenVideoElement.src = slides[currentIndex].file;
-            fullscreenOverlay.style.display = "flex";
-            fullscreenVideoElement.play();
-        }
-
-        function closeFullscreen(event) {
-            if (!event || event.target === fullscreenOverlay || event.target.tagName === 'BUTTON') {
-                fullscreenOverlay.style.display = "none";
-                fullscreenVideoElement.pause();
-                videoElement.play();
-            }
-        }
-
         document.addEventListener("keydown", (e) => {
-            if (fullscreenOverlay.style.display === "flex") {
-                if (e.key === "Escape") closeFullscreen();
-                return;
-            }
-            if (bookApp.style.display === "flex") {
+            if (bookApp.style.display === "flex" && tocContentDiv.style.display === "none") {
                 if (e.key === "ArrowRight") nextPage();
                 if (e.key === "ArrowLeft") prevPage();
             }
