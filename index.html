@@ -8,52 +8,53 @@
         * { box-sizing: border-box; }
         body {
             margin: 0; padding: 0;
-            background-color: #0b0b0c; color: #d6d6d6;
+            background-color: #05070c; color: #d6d6d6;
             font-family: 'Georgia', serif;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             min-height: 100vh; overflow-x: hidden;
         }
 
-        /* --- PAGINA DE ÎNTÂMPINARE (LANDING PAGE) --- */
+        /* --- LANDING PAGE --- */
         #landingPage {
             display: flex; flex-direction: column; align-items: center; justify-content: space-between;
-            width: 95vw; max-width: 1200px; height: 90vh;
-            background: #111113; border: 1px solid #222; border-radius: 12px;
-            padding: 30px 20px; box-shadow: 0 15px 45px rgba(0,0,0,0.8);
+            width: 95vw; max-width: 1200px; height: 92vh;
+            background: #090c14; border: 1px solid #1c2333; border-radius: 12px;
+            padding: 25px 20px; box-shadow: 0 15px 45px rgba(0,0,0,0.9);
             text-align: center; position: relative;
         }
 
         .landing-title {
-            font-size: 32px; font-weight: normal; letter-spacing: 3px;
-            color: #f0f0f0; margin: 0; font-style: italic;
-            border-bottom: 1px solid #26262a; padding-bottom: 15px; width: 100%;
+            font-size: 34px; font-weight: normal; letter-spacing: 3px;
+            color: #f3e5ab; margin: 0; font-style: italic;
+            border-bottom: 1px solid #1f293d; padding-bottom: 12px; width: 100%;
+            text-shadow: 0 0 10px rgba(243, 229, 171, 0.2);
         }
 
         .artwork-container {
             flex: 1; width: 100%; display: flex; justify-content: center; align-items: center;
-            position: relative; margin: 10px 0;
+            position: relative; margin: 10px 0; overflow: hidden; border-radius: 8px;
         }
-        .pencil-art {
+        .oil-art {
             max-height: 100%; max-width: 100%; object-fit: contain;
-            filter: drop-shadow(0 0 20px rgba(255,255,255,0.04));
+            filter: drop-shadow(0 0 25px rgba(230, 194, 0, 0.15));
         }
 
         .landing-nav {
             display: flex; gap: 20px; justify-content: center; width: 100%;
-            padding-top: 15px; border-top: 1px solid #26262a; flex-wrap: wrap;
+            padding-top: 15px; border-top: 1px solid #1f293d; flex-wrap: wrap;
         }
         .nav-btn {
-            background: #1c1c20; color: #e0e0e0; border: 1px solid #333;
+            background: #121826; color: #e0e0e0; border: 1px solid #2b3854;
             padding: 12px 28px; font-size: 16px; font-family: 'Georgia', serif;
             cursor: pointer; border-radius: 25px; transition: all 0.3s ease;
             letter-spacing: 1px;
         }
         .nav-btn:hover {
-            background: #2a2a30; border-color: #555; color: #fff;
-            transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            background: #1e2942; border-color: #ffd700; color: #fff;
+            transform: translateY(-2px); box-shadow: 0 4px 15px rgba(230, 194, 0, 0.2);
         }
 
-        /* --- INTERFAȚA CĂRȚII (PLAYER VIDEO & CUPRINS) --- */
+        /* --- PLAYER VIDEO & CUPRINS --- */
         #bookApp {
             display: none; flex-direction: column; align-items: center; justify-content: center;
             width: 100%; max-width: 95vw; animation: fadeIn 0.5s ease;
@@ -63,20 +64,20 @@
         .book-container {
             width: 90vw; height: 75vh; max-width: 1200px;
             display: flex; justify-content: center; align-items: center;
-            margin-bottom: 15px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
+            margin-bottom: 15px; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.95);
             border-radius: 8px; overflow: hidden; background: #000;
-            position: relative;
+            position: relative; border: 1px solid #222;
         }
         .book-video { width: 100%; height: 100%; object-fit: contain; display: block; }
         
         .toc-page-content {
             display: none; width: 100%; height: 100%;
-            background: #161616; border: 1px solid #333; border-radius: 8px;
+            background: #0d111a; border: 1px solid #222; border-radius: 8px;
             padding: 30px; overflow-y: auto; text-align: left;
         }
         .toc-page-content h2 { 
-            text-align: center; color: #f5f5f5; margin-top: 0; 
-            font-size: 26px; border-bottom: 1px solid #333; padding-bottom: 15px; 
+            text-align: center; color: #f3e5ab; margin-top: 0; 
+            font-size: 26px; border-bottom: 1px solid #222; padding-bottom: 15px; 
         }
         .toc-grid { 
             display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; 
@@ -84,9 +85,9 @@
         .toc-item {
             background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 6px;
             cursor: pointer; display: flex; justify-content: space-between; transition: background 0.2s;
-            font-size: 15px; border-bottom: 1px dashed #2a2a2a;
+            font-size: 15px; border-bottom: 1px dashed #222; color: #ccc;
         }
-        .toc-item:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .toc-item:hover { background: rgba(255,215,0,0.1); color: #ffd700; }
 
         .controls {
             display: flex; gap: 15px; align-items: center; flex-wrap: wrap; justify-content: center;
@@ -94,25 +95,25 @@
             border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 5px;
         }
         button, select {
-            background-color: #222; color: #fff; border: 1px solid #444;
+            background-color: #121826; color: #fff; border: 1px solid #2b3854;
             padding: 8px 16px; font-size: 15px; cursor: pointer; border-radius: 20px; outline: none;
             font-family: 'Georgia', serif;
         }
-        button:hover, select:hover { background-color: #444; border-color: #666; }
+        button:hover, select:hover { background-color: #1e2942; border-color: #ffd700; }
         .page-indicator { font-size: 15px; min-width: 130px; text-align: center; color: #bbb; }
 
         /* --- SECȚIUNI SECUNDARE --- */
         .sub-section {
             display: none; width: 90vw; max-width: 1000px; height: 80vh;
-            background: #121215; border: 1px solid #2a2a30; border-radius: 10px;
+            background: #0d111a; border: 1px solid #1f293d; border-radius: 10px;
             padding: 40px; overflow-y: auto; text-align: left; position: relative;
         }
-        .sub-section h2 { font-size: 28px; border-bottom: 1px solid #333; padding-bottom: 12px; margin-top: 0; color: #eee; }
+        .sub-section h2 { font-size: 28px; border-bottom: 1px solid #222; padding-bottom: 12px; margin-top: 0; color: #f3e5ab; }
         .back-home-btn {
-            margin-bottom: 20px; background: #222; border: 1px solid #444; color: #ccc;
+            margin-bottom: 20px; background: #121826; border: 1px solid #2b3854; color: #ccc;
             padding: 6px 16px; border-radius: 15px; cursor: pointer; font-size: 14px;
         }
-        .back-home-btn:hover { background: #333; color: #fff; }
+        .back-home-btn:hover { background: #1e2942; color: #fff; }
     </style>
 </head>
 <body>
@@ -122,69 +123,106 @@
         <h1 class="landing-title">Sufletul țărmurilor</h1>
         
         <div class="artwork-container">
-            <!-- Ilustrație în creion substanțială: Poet melancolic pe semilună, cu tușe artistice fine de grafit -->
-            <svg class="pencil-art" viewBox="0 0 900 650" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <!-- PICTURĂ IMPRESIONISTĂ (TUȘE PROEMINENTE, LUNĂ AURIE SPRE STÂNGA, POET PR PRIVITOR, VALURI) -->
+            <svg class="oil-art" viewBox="0 0 1000 700" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                    <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.08"/>
+                    <!-- Filtru de tușe groase de vopsea în ulei -->
+                    <filter id="oilStrokes" x="-10%" y="-10%" width="120%" height="120%">
+                        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise" />
+                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G" />
+                    </filter>
+                    
+                    <!-- Strălucire caldă aurie -->
+                    <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#ffe875" stop-opacity="0.35"/>
+                        <stop offset="50%" stop-color="#ffb700" stop-opacity="0.15"/>
                         <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
                     </radialGradient>
                 </defs>
-                <rect width="900" height="650" fill="#111113"/>
+
+                <!-- Fundal: Cer de noapte impresionist în tușe de albastru/purpuriu -->
+                <rect width="1000" height="700" fill="#060913"/>
                 
-                <!-- Fundal: Cer nocturn cu stele subtile desenate mărunt -->
-                <g stroke="#a0a0a0" stroke-width="0.8" opacity="0.6">
-                    <circle cx="120" cy="90" r="1.5" fill="#e0e0e0"/>
-                    <circle cx="280" cy="130" r="1" fill="#e0e0e0"/>
-                    <circle cx="750" cy="100" r="2" fill="#e0e0e0"/>
-                    <circle cx="820" cy="220" r="1.2" fill="#e0e0e0"/>
-                    <circle cx="150" cy="280" r="1" fill="#e0e0e0"/>
-                    <circle cx="780" cy="480" r="1.5" fill="#e0e0e0"/>
-                    <!-- Câteva constelații discrete / linii de schiță -->
-                    <line x1="120" y1="90" x2="160" y2="120" opacity="0.3"/>
-                    <line x1="750" cy="100" x2="820" y2="220" opacity="0.2"/>
+                <g filter="url(#oilStrokes)">
+                    <!-- Tușe cer de noapte Van Gogh style -->
+                    <path d="M0,0 L1000,0 L1000,480 L0,480 Z" fill="#0a1024"/>
+                    <path d="M 50,50 Q 250,20 500,80 Q 750,140 950,60" stroke="#121d3b" stroke-width="40" fill="none" opacity="0.8"/>
+                    <path d="M 0,150 Q 300,200 600,120 Q 800,80 1000,180" stroke="#1a274c" stroke-width="50" fill="none" opacity="0.7"/>
+                    <path d="M 100,280 Q 400,220 700,310 Q 850,280 1000,320" stroke="#141c36" stroke-width="45" fill="none" opacity="0.9"/>
+
+                    <!-- Stele impresioniste (vârtojuri de gălbui și albastru) -->
+                    <g fill="none" stroke-linecap="round">
+                        <circle cx="180" cy="100" r="12" stroke="#ffe066" stroke-width="4" opacity="0.8"/>
+                        <circle cx="180" cy="100" r="4" fill="#ffffff"/>
+                        
+                        <circle cx="820" cy="110" r="15" stroke="#ffd11a" stroke-width="5" opacity="0.8"/>
+                        <circle cx="820" cy="110" r="5" fill="#ffffff"/>
+
+                        <circle cx="700" cy="220" r="10" stroke="#ffeb99" stroke-width="3" opacity="0.7"/>
+                        <circle cx="300" cy="240" r="8" stroke="#ffe066" stroke-width="3" opacity="0.6"/>
+                    </g>
+
+                    <!-- Halou auriu masiv în spatele lunii -->
+                    <circle cx="500" cy="260" r="230" fill="url(#goldGlow)"/>
+
+                    <!-- LUNA AURIE ÎN CREȘTERE (CAVITATEA / ORIENTAREA SPRE STÂNGA) -->
+                    <!-- Exterior auriu aprins -->
+                    <path d="M 460,80 C 620,130 650,370 480,480 C 680,420 680,140 460,80 Z" 
+                          fill="#ffcc00" stroke="#ffe875" stroke-width="6" stroke-linejoin="round"/>
+                    
+                    <!-- Tușe interioare de vopsea pe semilună (textură bogată de aur) -->
+                    <path d="M 480,110 C 600,160 620,350 500,450" stroke="#ffaa00" stroke-width="12" fill="none" opacity="0.8"/>
+                    <path d="M 510,140 C 610,200 610,320 520,420" stroke="#e69900" stroke-width="10" fill="none" opacity="0.7"/>
+                    <path d="M 540,180 C 600,230 600,290 540,380" stroke="#fff0aa" stroke-width="8" fill="none" opacity="0.9"/>
+
+                    <!-- POETUL SENSIBIL AȘEZAT ÎN CORNUL LUNII (PRIVIND SPRE NOI / SPRE STÂNGA-JOS) -->
+                    <g opacity="0.95">
+                        <!-- Haină lungă, romantică în tonuri de teracotă și vișiniu (stil impresionist) -->
+                        <path d="M 530,310 C 500,330 470,380 460,430 C 490,440 520,420 545,390 C 555,360 550,330 530,310 Z" 
+                              fill="#6b2d39" stroke="#8c3f4f" stroke-width="4"/>
+                        <path d="M 480,360 Q 510,390 530,415" stroke="#a84e60" stroke-width="5" fill="none"/>
+
+                        <!-- Capul întors spre noi/profil stânga, păr boem fin -->
+                        <circle cx="530" cy="280" r="16" fill="#fce0d4"/> <!-- Chip iluminat -->
+                        <path d="M 520,265 C 505,270 515,295 520,300" stroke="#3b2319" stroke-width="5" fill="none"/> <!-- Plete scurte/medii -->
+                        <path d="M 525,264 C 540,260 545,275 540,290" fill="#4a2e21"/> <!-- Păr pe spate -->
+
+                        <!-- Brațul sprijinit delicat pe genunchi -->
+                        <path d="M 525,315 Q 500,340 495,365" stroke="#fce0d4" stroke-width="6" fill="none" stroke-linecap="round"/>
+                        <path d="M 525,315 Q 500,340 495,365" stroke="#6b2d39" stroke-width="10" fill="none" opacity="0.5"/>
+
+                        <!-- Picioarele lăsate relaxat pe marginea lunii -->
+                        <path d="M 480,410 L 450,470 L 435,520" stroke="#2b354d" stroke-width="9" fill="none" stroke-linecap="round"/>
+                        <path d="M 495,410 L 470,475 L 460,525" stroke="#1d2538" stroke-width="8" fill="none" stroke-linecap="round"/>
+                    </g>
+
+                    <!-- MAREA IMPRESIONISTĂ ȘI VALURILE CU REFLEXII AURII -->
+                    <!-- Baza mării -->
+                    <rect x="0" y="470" width="1000" height="230" fill="#081021"/>
+                    
+                    <!-- Tușe orizontale proeminente de valuri (Albastru cobalt, turcoaz și aur) -->
+                    <g stroke-linecap="round">
+                        <!-- Valuri de adâncime -->
+                        <path d="M 0,490 Q 250,510 500,485 Q 750,510 1000,490" stroke="#0e1a38" stroke-width="12" fill="none"/>
+                        <path d="M 50,520 Q 300,500 600,530 Q 800,505 950,525" stroke="#13244d" stroke-width="14" fill="none"/>
+                        
+                        <!-- REFLEXII AURII MASIVE DE LA LUNĂ PE MARE -->
+                        <path d="M 420,500 L 560,500" stroke="#ffd700" stroke-width="6" opacity="0.9"/>
+                        <path d="M 380,520 L 600,520" stroke="#ffcc00" stroke-width="8" opacity="0.85"/>
+                        <path d="M 430,535 L 530,535" stroke="#ffe875" stroke-width="5" opacity="0.9"/>
+                        <path d="M 340,550 L 640,550" stroke="#e6b800" stroke-width="10" opacity="0.8"/>
+                        <path d="M 400,570 L 580,570" stroke="#ffd700" stroke-width="7" opacity="0.75"/>
+                        <path d="M 300,595 L 680,595" stroke="#ffaa00" stroke-width="12" opacity="0.7"/>
+                        <path d="M 360,620 L 620,620" stroke="#e69900" stroke-width="8" opacity="0.6"/>
+                        <path d="M 250,650 L 720,650" stroke="#d48800" stroke-width="14" opacity="0.5"/>
+
+                        <!-- Valuri secundare cu spumă turcoaz/argintie -->
+                        <path d="M 20,560 Q 200,540 350,565" stroke="#1a3d66" stroke-width="8" fill="none"/>
+                        <path d="M 680,560 Q 850,580 980,550" stroke="#1a3d66" stroke-width="8" fill="none"/>
+                        <path d="M 100,610 Q 280,630 400,605" stroke="#245285" stroke-width="6" fill="none" opacity="0.6"/>
+                        <path d="M 600,625 Q 780,600 920,630" stroke="#245285" stroke-width="6" fill="none" opacity="0.6"/>
+                    </g>
                 </g>
-
-                <!-- Halou fin în jurul lunii -->
-                <circle cx="480" cy="240" r="220" fill="url(#moonGlow)"/>
-
-                <!-- SEMILUNA SUBȚIRE ȘI TEXTURATĂ ARTISTIC -->
-                <path d="M 500,80 Q 320,130 360,370 Q 390,520 560,490 Q 420,440 430,290 Q 440,140 500,80 Z" 
-                      fill="#1b1b20" stroke="#c0c0c0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- Umbre interioare de grafit pe semilună -->
-                <path d="M 375,350 Q 410,430 520,460" fill="none" stroke="#8a8a92" stroke-width="1.2" opacity="0.5" stroke-dasharray="3,3"/>
-                <path d="M 390,250 Q 410,310 425,380" fill="none" stroke="#7a7a82" stroke-width="1" opacity="0.4"/>
-
-                <!-- POETUL / ADOLESCENTUL MELANCOLIC STÂND PE LUNĂ -->
-                <g stroke="#d0d0d6" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <!-- Trunchiul și haina romantică fluidă -->
-                    <path d="M 425,290 C 405,305 380,335 365,375 L 385,395 C 400,355 425,325 440,310 Z" fill="#18181d"/>
-                    <path d="M 375,370 C 370,390 360,415 350,435" opacity="0.8"/> <!-- cute pe haine -->
-                    
-                    <!-- Capul și pletele fine -->
-                    <circle cx="410" cy="268" r="17" fill="#18181d"/>
-                    <!-- Păr / Plete bogate specifice unui poet -->
-                    <path d="M 395,265 C 390,250 405,245 420,255 C 428,248 435,260 430,272" fill="#25252b"/>
-                    
-                    <!-- Gâtul și gulerul cămășii -->
-                    <path d="M 406,285 L 414,285"/>
-                    
-                    <!-- Picioarele care atârnă liber în aer -->
-                    <path d="M 375,385 L 345,460 L 335,525"/>
-                    <path d="M 385,390 L 360,465 L 355,530"/>
-                    
-                    <!-- Pantofi clasici / Ghete ușoare de poet -->
-                    <path d="M 325,523 Q 335,532 342,525" fill="#2a2a30"/>
-                    <path d="M 345,528 Q 355,538 362,530" fill="#2a2a30"/>
-
-                    <!-- Brațul sprijinit relaxat, ținând eventual un mic pergament sau o pană simbolică -->
-                    <path d="M 432,310 Q 455,325 465,350"/>
-                    <path d="M 465,350 L 475,360"/>
-                </g>
-
-                <!-- Schițe suplimentare de fundal (păsări/rândunici stilizate în zbor îndepărtat, tușe de creion) -->
-                <path d="M 220,180 Q 230,170 240,180 Q 250,170 260,180" fill="none" stroke="#9a9a9a" stroke-width="1" opacity="0.4"/>
-                <path d="M 235,190 Q 242,183 250,190" fill="none" stroke="#9a9a9a" stroke-width="0.8" opacity="0.3"/>
             </svg>
         </div>
 
@@ -216,7 +254,7 @@
         <button class="back-home-btn" onclick="showLanding()" style="align-self: flex-start; margin-bottom: 10px;">❮ Înapoi la început</button>
         
         <div class="book-container">
-            <!-- Am adăugat atributele 'controls' pentru a asigura controlul complet pe pauză, play și volum -->
+            <!-- Player video cu controale native complete (Pauză, Play, Volum, Bară de timp) -->
             <video id="pageVideo" class="book-video" controls playsinline preload="auto"></video>
             <div id="tocContentDiv" class="toc-page-content">
                 <h2>CUPRINS</h2>
@@ -327,7 +365,7 @@
 
                 videoElement.src = currentSlide.file;
                 videoElement.load();
-                videoElement.play().catch(err => console.log("Redarea automată a necesitat permisiune", err));
+                videoElement.play().catch(err => console.log("Așteaptă interacțiune directă", err));
             }
 
             indicatorElement.innerText = currentSlide.title;
