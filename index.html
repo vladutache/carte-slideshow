@@ -5,53 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sufletul țărmurilor — Vlad Opran</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap');
+
         * { box-sizing: border-box; }
         body {
             margin: 0; padding: 0;
-            background-color: #090c12; color: #d6d6d6;
-            font-family: 'Georgia', serif;
+            background-color: #0b0e14; color: #d6d6d6;
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             min-height: 100vh; overflow-x: hidden;
         }
 
         /* --- LANDING PAGE --- */
         #landingPage {
-            display: flex; justify-content: center; align-items: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
             width: 100vw; height: 100vh;
-            padding: 0; margin: 0;
-            background: #090c12; position: relative;
+            background: #090c12;
+            padding: 20px; text-align: center;
         }
 
-        .image-wrapper {
-            position: relative;
-            display: inline-block;
-            max-width: 100vw;
-            max-height: 95vh;
+        .landing-title {
+            font-size: 42px; font-weight: normal; font-style: italic;
+            color: #f0c975; margin: 0 0 15px 0;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(240, 201, 117, 0.2);
+        }
+
+        .artwork-container {
+            width: 100%; max-width: 650px;
+            display: flex; justify-content: center; align-items: center;
+            margin: 10px 0; position: relative;
         }
 
         .artwork-img {
-            max-width: 100vw;
-            max-height: 95vh;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            display: block;
+            max-height: 45vh; max-width: 100%; object-fit: contain;
+            border-radius: 4px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-            border-radius: 4px;
         }
 
-        /* Butoane invizibile poziționate exact peste rubricile din imagine */
-        .hotspot {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.0); /* devine vizibil cu o culoare dacă vrei să testezi poziția */
-            border: none;
-            cursor: pointer;
-            z-index: 10;
+        .author-name {
+            font-size: 28px; font-style: italic;
+            color: #f0c975; margin: 15px 0 20px 0;
+            letter-spacing: 1.5px;
         }
 
-        .hotspot:hover {
-            background: rgba(255, 215, 0, 0.1); /* O mică strălucire fină aurie la trecerea mouse-ului */
-            border-radius: 4px;
+        .landing-nav {
+            display: flex; gap: 40px; justify-content: center; align-items: center;
+            width: 100%; max-width: 700px;
+        }
+
+        .nav-link {
+            background: none; border: none;
+            color: #f0c975; font-size: 24px; font-style: italic;
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            cursor: pointer; transition: all 0.3s ease;
+            padding: 5px 10px; text-decoration: none;
+        }
+
+        .nav-link:hover {
+            color: #ffffff; text-shadow: 0 0 12px rgba(240, 201, 117, 0.6);
+            transform: translateY(-2px);
         }
 
         /* --- PLAYER VIDEO & CUPRINS --- */
@@ -97,7 +110,7 @@
         button, select {
             background-color: #121826; color: #fff; border: 1px solid #2b3854;
             padding: 8px 18px; font-size: 16px; cursor: pointer; border-radius: 20px; outline: none;
-            font-family: 'Georgia', serif; font-style: italic;
+            font-family: 'Cormorant Garamond', 'Georgia', serif; font-style: italic;
         }
         button:hover, select:hover { background-color: #1e2942; border-color: #f0c975; }
         .page-indicator { font-size: 18px; font-style: italic; min-width: 130px; text-align: center; color: #bbb; }
@@ -120,18 +133,19 @@
 
     <!-- PAGINA DE ÎNTÂMPINARE -->
     <div id="landingPage">
-        <div class="image-wrapper">
-            <img src="ammonite-landing.jpg" alt="Sufletul țărmurilor — Vlad Opran" class="artwork-img">
-            
-            <!-- Butoane interactive poziționate procentual exact pe texte -->
-            <!-- Rubrica: Despre autor (Stânga jos) -->
-            <button class="hotspot" style="bottom: 8%; left: 18%; width: 20%; height: 8%;" onclick="showSection('aboutSection')"></button>
-            
-            <!-- Rubrica: Redă (Centru jos) -->
-            <button class="hotspot" style="bottom: 8%; left: 40%; width: 20%; height: 8%;" onclick="showBookApp()"></button>
-            
-            <!-- Rubrica: Bibliotecă (Dreapta jos) -->
-            <button class="hotspot" style="bottom: 8%; left: 62%; width: 20%; height: 8%;" onclick="showSection('librarySection')"></button>
+        <h1 class="landing-title">Sufletul țărmurilor</h1>
+        
+        <div class="artwork-container">
+            <!-- Asigură-te că imaginea curată cu amonitul se numește ammonite-landing.jpg în repo -->
+            <img src="ammonite-landing.jpg" alt="Amonit - Vlad Opran" class="artwork-img" />
+        </div>
+
+        <div class="author-name">Vlad Opran</div>
+
+        <div class="landing-nav">
+            <button class="nav-link" onclick="showSection('aboutSection')">Despre autor</button>
+            <button class="nav-link" onclick="showBookApp()">Redă</button>
+            <button class="nav-link" onclick="showSection('librarySection')">Bibliotecă</button>
         </div>
     </div>
 
@@ -270,12 +284,6 @@
 
             indicatorElement.innerText = currentSlide.title;
             selectElement.value = currentIndex;
-        }
-
-        button, select {
-            background-color: #121826; color: #fff; border: 1px solid #2b3854;
-            padding: 8px 18px; font-size: 16px; cursor: pointer; border-radius: 20px; outline: none;
-            font-family: 'Georgia', serif; font-style: italic;
         }
 
         function nextPage() {
