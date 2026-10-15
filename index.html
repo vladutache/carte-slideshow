@@ -18,21 +18,22 @@
         #landingPage {
             display: flex; justify-content: center; align-items: center;
             width: 100vw; height: 100vh;
-            padding: 0; margin: 0;
+            padding: 20px; margin: 0;
             background: #090c12;
         }
 
         .artwork-img {
             max-width: 100vw;
-            max-height: 100vh;
+            max-height: 92vh;
             width: auto;
             height: auto;
             object-fit: contain;
             display: block;
             margin: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            border-radius: 4px;
         }
 
-        /* Styling pentru zonele interactive (cursor de mâna) */
         area { cursor: pointer; }
 
         /* --- PLAYER VIDEO & CUPRINS --- */
@@ -99,18 +100,18 @@
 </head>
 <body>
 
-    <!-- PAGINA DE ÎNTÂMPINARE (Afișează doar tabloul tău complet) -->
+    <!-- PAGINA DE ÎNTÂMPINARE -->
     <div id="landingPage">
         <img src="ammonite-landing.jpg" alt="Sufletul țărmurilor — Vlad Opran" class="artwork-img" usemap="#landingMap">
 
-        <!-- Hartă invizibilă de clicuri plasată peste rubricile scrise pe imagine -->
+        <!-- Hartă de click-uri pe rubricile din imagine -->
         <map name="landingMap">
-            <!-- Zona stânga: Despre autor -->
-            <area shape="rect" coords="150,580,380,680" alt="Despre autor" onclick="showSection('aboutSection')">
-            <!-- Zona centru: Redă -->
-            <area shape="rect" coords="420,580,580,680" alt="Redă" onclick="showBookApp()">
-            <!-- Zona dreapta: Bibliotecă -->
-            <area shape="rect" coords="620,580,850,680" alt="Bibliotecă" onclick="showSection('librarySection')">
+            <!-- Stânga jos: Despre autor -->
+            <area shape="rect" coords="100,750,380,880" alt="Despre autor" onclick="showSection('aboutSection')">
+            <!-- Centru jos: Redă -->
+            <area shape="rect" coords="400,750,600,880" alt="Redă" onclick="showBookApp()">
+            <!-- Dreapta jos: Bibliotecă -->
+            <area shape="rect" coords="620,750,900,880" alt="Bibliotecă" onclick="showSection('librarySection')">
         </map>
     </div>
 
