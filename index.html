@@ -74,76 +74,6 @@
             color: #ffffff; text-shadow: 0 0 15px rgba(240, 201, 117, 0.9);
             transform: translateY(-2px);
         }
-          /* --- REGULI ADAPTARE MOBIL (TELEFOANE) --- */
-        @media (max-width: 768px) {
-            .landing-nav {
-                bottom: 3.5%;
-                gap: 15px;
-            }
-            .nav-link {
-                font-size: 20px;
-                padding: 3px 6px;
-            }
-
-            /* Adaptare Player Video pe Telefon/Tableta */
-            #bookApp {
-                max-width: 100vw;
-                padding: 10px;
-            }
-            .book-container {
-                width: 100%;
-                height: 50vh;
-                max-height: 400px;
-            }
-            .controls {
-                width: 100%;
-                padding: 8px 10px;
-                gap: 8px;
-            }
-            button, select {
-                padding: 6px 12px;
-                font-size: 14px;
-            }
-            .page-indicator {
-                font-size: 15px;
-                min-width: 90px;
-            }
-            .sub-section {
-                width: 95vw;
-                height: 85vh;
-                padding: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .landing-nav {
-                bottom: 3%;
-                gap: 8px;
-            }
-            .nav-link {
-                font-size: 17px;
-                padding: 2px 4px;
-                letter-spacing: 0.5px;
-            }
-
-            /* Adaptare ecran foarte îngust */
-            .book-container {
-                height: 42vh;
-            }
-            .controls {
-                gap: 5px;
-            }
-            button, select {
-                padding: 5px 8px;
-                font-size: 13px;
-            }
-            .page-indicator {
-                font-size: 13px;
-                min-width: 80px;
-            }
-        }
-        }
-        }
 
         /* --- PLAYER VIDEO & CUPRINS --- */
         #bookApp {
@@ -205,6 +135,127 @@
             padding: 6px 16px; border-radius: 15px; cursor: pointer; font-size: 16px; font-style: italic;
         }
         .back-home-btn:hover { background: #1e2942; color: #fff; border-color: #f0c975; }
+        /* --- REGULI ADAPTARE MOBIL (TELEFOANE & TABLETE) --- */
+        @media (max-width: 768px) {
+            .landing-nav {
+                bottom: 3.5%;
+                gap: 15px;
+            }
+            .nav-link {
+                font-size: 20px;
+                padding: 3px 6px;
+            }
+
+            /* Forțare aliniere verticală pe mobil */
+            #bookApp {
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+                width: 100vw !important;
+                max-width: 100vw !important;
+                padding: 10px !important;
+                box-sizing: border-box !important;
+            }
+
+            .book-container {
+                width: 95vw !important;
+                height: 45vh !important;
+                max-height: 380px !important;
+                margin-bottom: 10px !important;
+            }
+
+            .controls {
+                width: 95vw !important;
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                padding: 8px 5px !important;
+                gap: 6px !important;
+            }
+
+            button, select {
+                padding: 6px 10px !important;
+                font-size: 13px !important;
+            }
+
+            .page-indicator {
+                font-size: 14px !important;
+                min-width: 70px !important;
+            }
+
+            .back-home-btn {
+                align-self: center !important;
+                margin-bottom: 10px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .landing-nav {
+                bottom: 3.5%;
+                gap: 15px;
+            }
+            .nav-link {
+                font-size: 20px;
+                padding: 3px 6px;
+            }
+
+            /* Forțare aliniere verticală pe mobil */
+            #bookApp {
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: flex-start !important;
+                width: 100vw !important;
+                max-width: 100vw !important;
+                padding: 10px !important;
+                box-sizing: border-box !important;
+            }
+
+            .book-container {
+                width: 95vw !important;
+                height: 45vh !important;
+                max-height: 380px !important;
+                margin-bottom: 10px !important;
+            }
+
+            .controls {
+                width: 95vw !important;
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                padding: 8px 5px !important;
+                gap: 6px !important;
+            }
+
+            button, select {
+                padding: 6px 10px !important;
+                font-size: 13px !important;
+            }
+
+            .page-indicator {
+                font-size: 14px !important;
+                min-width: 70px !important;
+            }
+
+            .back-home-btn {
+                align-self: center !important;
+                margin-bottom: 10px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .landing-nav {
+                bottom: 3%;
+                gap: 8px;
+            }
+            .nav-link {
+                font-size: 17px;
+                padding: 2px 4px;
+                letter-spacing: 0.5px;
+            }
+            .book-container {
+                height: 40vh !important;
+            }
+        }
     </style>
 </head>
 <body>
