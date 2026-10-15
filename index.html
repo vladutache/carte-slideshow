@@ -18,48 +18,41 @@
 
         /* --- LANDING PAGE --- */
         #landingPage {
-            display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
             width: 100vw; height: 100vh;
             background: #090c12;
-            padding: 40px 20px; text-align: center; position: relative;
-        }
-
-        .landing-title {
-            font-size: 52px; font-weight: normal; font-style: italic;
-            color: #f0c975; margin: 0;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(240, 201, 117, 0.2);
+            padding: 20px; text-align: center; position: relative;
         }
 
         .artwork-container {
-            flex: 1; width: 100%; max-width: 900px;
+            width: 100%; max-width: 750px;
             display: flex; justify-content: center; align-items: center;
-            margin: 15px 0; position: relative;
+            margin: 10px 0; position: relative;
         }
 
         .artwork-img {
-            max-height: 55vh; max-width: 100%; object-fit: contain;
+            max-height: 48vh; max-width: 100%; object-fit: contain;
             border-radius: 4px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.8);
         }
 
         .author-name {
-            font-size: 34px; font-style: italic;
-            color: #f0c975; margin: 10px 0 25px 0;
+            font-size: 28px; font-style: italic;
+            color: #f0c975; margin: 8px 0 18px 0;
             letter-spacing: 1.5px;
         }
 
         .landing-nav {
-            display: flex; gap: 60px; justify-content: center; align-items: center;
-            width: 100%; max-width: 800px;
+            display: flex; gap: 50px; justify-content: center; align-items: center;
+            width: 100%; max-width: 700px;
         }
 
         .nav-link {
             background: none; border: none;
-            color: #f0c975; font-size: 28px; font-style: italic;
+            color: #f0c975; font-size: 26px; font-style: italic;
             font-family: 'Cormorant Garamond', 'Georgia', serif;
             cursor: pointer; transition: all 0.3s ease;
-            padding: 5px 15px; text-decoration: none;
+            padding: 5px 10px; text-decoration: none;
         }
 
         .nav-link:hover {
@@ -131,13 +124,11 @@
 </head>
 <body>
 
-    <!-- PAGINA DE ÎNTÂMPINARE (EXACT CA ÎN IMAGINE) -->
+    <!-- PAGINA DE ÎNTÂMPINARE -->
     <div id="landingPage">
-        <h1 class="landing-title">Sufletul țărmurilor</h1>
-        
         <div class="artwork-container">
-            <!-- Asigură-te că imaginea ta se numește ammonite-landing.jpg pe GitHub -->
-            <img src="ammonite-landing.jpg" alt="Amonit - Vlad Opran" class="artwork-img" />
+            <!-- Asigură-te că fișierul imagine se numește ammonite-landing.jpg în repo-ul tău -->
+            <img src="ammonite-landing.jpg" alt="Sufletul țărmurilor - Vlad Opran" class="artwork-img" />
         </div>
 
         <div class="author-name">Vlad Opran</div>
@@ -153,7 +144,7 @@
     <div id="aboutSection" class="sub-section">
         <button class="back-home-btn" onclick="showLanding()">❮ Înapoi</button>
         <h2>Despre autor</h2>
-        <!-- Spațiu liber rezervat pentru textul tău -->
+        <!-- Spațiu liber rezervat pentru textul tău personalizat -->
     </div>
 
     <!-- SECȚIUNEA: BIBLIOTECĂ -->
