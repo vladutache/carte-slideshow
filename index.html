@@ -18,23 +18,41 @@
         #landingPage {
             display: flex; justify-content: center; align-items: center;
             width: 100vw; height: 100vh;
-            padding: 20px; margin: 0;
-            background: #090c12;
+            padding: 0; margin: 0;
+            background: #090c12; position: relative;
+        }
+
+        .image-wrapper {
+            position: relative;
+            display: inline-block;
+            max-width: 100vw;
+            max-height: 95vh;
         }
 
         .artwork-img {
             max-width: 100vw;
-            max-height: 92vh;
+            max-height: 95vh;
             width: auto;
             height: auto;
             object-fit: contain;
             display: block;
-            margin: auto;
             box-shadow: 0 10px 40px rgba(0,0,0,0.8);
             border-radius: 4px;
         }
 
-        area { cursor: pointer; }
+        /* Butoane invizibile poziționate exact peste rubricile din imagine */
+        .hotspot {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.0); /* devine vizibil cu o culoare dacă vrei să testezi poziția */
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .hotspot:hover {
+            background: rgba(255, 215, 0, 0.1); /* O mică strălucire fină aurie la trecerea mouse-ului */
+            border-radius: 4px;
+        }
 
         /* --- PLAYER VIDEO & CUPRINS --- */
         #bookApp {
@@ -102,17 +120,19 @@
 
     <!-- PAGINA DE ÎNTÂMPINARE -->
     <div id="landingPage">
-        <img src="ammonite-landing.jpg" alt="Sufletul țărmurilor — Vlad Opran" class="artwork-img" usemap="#landingMap">
-
-        <!-- Hartă de click-uri pe rubricile din imagine -->
-        <map name="landingMap">
-            <!-- Stânga jos: Despre autor -->
-            <area shape="rect" coords="100,750,380,880" alt="Despre autor" onclick="showSection('aboutSection')">
-            <!-- Centru jos: Redă -->
-            <area shape="rect" coords="400,750,600,880" alt="Redă" onclick="showBookApp()">
-            <!-- Dreapta jos: Bibliotecă -->
-            <area shape="rect" coords="620,750,900,880" alt="Bibliotecă" onclick="showSection('librarySection')">
-        </map>
+        <div class="image-wrapper">
+            <img src="ammonite-landing.jpg" alt="Sufletul țărmurilor — Vlad Opran" class="artwork-img">
+            
+            <!-- Butoane interactive poziționate procentual exact pe texte -->
+            <!-- Rubrica: Despre autor (Stânga jos) -->
+            <button class="hotspot" style="bottom: 8%; left: 18%; width: 20%; height: 8%;" onclick="showSection('aboutSection')"></button>
+            
+            <!-- Rubrica: Redă (Centru jos) -->
+            <button class="hotspot" style="bottom: 8%; left: 40%; width: 20%; height: 8%;" onclick="showBookApp()"></button>
+            
+            <!-- Rubrica: Bibliotecă (Dreapta jos) -->
+            <button class="hotspot" style="bottom: 8%; left: 62%; width: 20%; height: 8%;" onclick="showSection('librarySection')"></button>
+        </div>
     </div>
 
     <!-- SECȚIUNEA: DESPRE AUTOR -->
@@ -250,6 +270,12 @@
 
             indicatorElement.innerText = currentSlide.title;
             selectElement.value = currentIndex;
+        }
+
+        button, select {
+            background-color: #121826; color: #fff; border: 1px solid #2b3854;
+            padding: 8px 18px; font-size: 16px; cursor: pointer; border-radius: 20px; outline: none;
+            font-family: 'Georgia', serif; font-style: italic;
         }
 
         function nextPage() {
