@@ -21,39 +21,46 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             width: 100vw; height: 100vh;
             background: #090c12;
-            padding: 20px; text-align: center; position: relative;
+            padding: 0; margin: 0; position: relative;
         }
 
+        /* Containerul imaginii devine referință pentru butoanele suprapuse */
         .artwork-container {
-            width: 100%; max-width: 900px;
-            display: flex; justify-content: center; align-items: center;
-            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+            max-width: 95vw;
+            max-height: 95vh;
         }
 
         .artwork-img {
-            max-height: 75vh; max-width: 100%; object-fit: contain;
+            max-height: 90vh; max-width: 100vw; object-fit: contain;
             border-radius: 4px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            display: block;
         }
 
-        /* Meniul de navigare plasat elegant sub imagine */
+        /* Meniul suprapus direct pe partea de jos a imaginii, sub Vlad Opran */
         .landing-nav {
+            position: absolute;
+            bottom: 4%; /* reglează acest procentaj dacă vrei mai sus sau mai jos pe imagine */
+            left: 50%;
+            transform: translateX(-50%);
             display: flex; gap: 40px; justify-content: center; align-items: center;
-            margin-top: 15px;
+            width: 100%;
         }
 
         .nav-link {
             background: none; border: none;
-            color: #f0c975; font-size: 26px; font-style: italic;
+            color: #f0c975; font-size: 24px; font-style: italic;
             font-family: 'Cormorant Garamond', 'Georgia', serif;
             cursor: pointer; transition: all 0.3s ease;
             padding: 5px 10px; text-decoration: none;
             letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(240, 201, 117, 0.2);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
         }
 
         .nav-link:hover {
-            color: #ffffff; text-shadow: 0 0 15px rgba(240, 201, 117, 0.7);
+            color: #ffffff; text-shadow: 0 0 12px rgba(240, 201, 117, 0.8);
             transform: translateY(-2px);
         }
 
@@ -124,14 +131,15 @@
     <!-- PAGINA DE ÎNTÂMPINARE -->
     <div id="landingPage">
         <div class="artwork-container">
-            <!-- Imaginea curată încărcată de tine pe GitHub -->
+            <!-- Imaginea curată cu Vlad Opran la bază -->
             <img src="ammonite-landing.jpg" alt="Sufletul țărmurilor — Vlad Opran" class="artwork-img" />
-        </div>
-
-        <div class="landing-nav">
-            <button class="nav-link" onclick="showSection('aboutSection')">Despre autor</button>
-            <button class="nav-link" onclick="showBookApp()">Redă</button>
-            <button class="nav-link" onclick="showSection('librarySection')">Bibliotecă</button>
+            
+            <!-- Rubricile poziționate direct pe imagine, sub Vlad Opran -->
+            <div class="landing-nav">
+                <button class="nav-link" onclick="showSection('aboutSection')">Despre autor</button>
+                <button class="nav-link" onclick="showBookApp()">Redă</button>
+                <button class="nav-link" onclick="showSection('librarySection')">Bibliotecă</button>
+            </div>
         </div>
     </div>
 
