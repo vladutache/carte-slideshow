@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sufletul țărmurilor — Vlad Opran</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap');
+
         * { box-sizing: border-box; }
         body {
             margin: 0; padding: 0;
-            background-color: #05070c; color: #d6d6d6;
-            font-family: 'Georgia', serif;
+            background-color: #0b0e14; color: #d6d6d6;
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             min-height: 100vh; overflow-x: hidden;
         }
@@ -17,42 +19,52 @@
         /* --- LANDING PAGE --- */
         #landingPage {
             display: flex; flex-direction: column; align-items: center; justify-content: space-between;
-            width: 95vw; max-width: 1200px; height: 92vh;
-            background: #090c14; border: 1px solid #1c2333; border-radius: 12px;
-            padding: 25px 20px; box-shadow: 0 15px 45px rgba(0,0,0,0.9);
-            text-align: center; position: relative;
+            width: 100vw; height: 100vh;
+            background: #090c12;
+            padding: 40px 20px; text-align: center; position: relative;
         }
 
         .landing-title {
-            font-size: 34px; font-weight: normal; letter-spacing: 3px;
-            color: #f3e5ab; margin: 0; font-style: italic;
-            border-bottom: 1px solid #1f293d; padding-bottom: 12px; width: 100%;
-            text-shadow: 0 0 10px rgba(243, 229, 171, 0.2);
+            font-size: 52px; font-weight: normal; font-style: italic;
+            color: #f0c975; margin: 0;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(240, 201, 117, 0.2);
         }
 
         .artwork-container {
-            flex: 1; width: 100%; display: flex; justify-content: center; align-items: center;
-            position: relative; margin: 10px 0; overflow: hidden; border-radius: 8px;
+            flex: 1; width: 100%; max-width: 900px;
+            display: flex; justify-content: center; align-items: center;
+            margin: 15px 0; position: relative;
         }
-        .oil-art {
-            max-height: 100%; max-width: 100%; object-fit: contain;
-            filter: drop-shadow(0 0 25px rgba(230, 194, 0, 0.15));
-            border-radius: 6px;
+
+        .artwork-img {
+            max-height: 55vh; max-width: 100%; object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+        }
+
+        .author-name {
+            font-size: 34px; font-style: italic;
+            color: #f0c975; margin: 10px 0 25px 0;
+            letter-spacing: 1.5px;
         }
 
         .landing-nav {
-            display: flex; gap: 20px; justify-content: center; width: 100%;
-            padding-top: 15px; border-top: 1px solid #1f293d; flex-wrap: wrap;
+            display: flex; gap: 60px; justify-content: center; align-items: center;
+            width: 100%; max-width: 800px;
         }
-        .nav-btn {
-            background: #121826; color: #e0e0e0; border: 1px solid #2b3854;
-            padding: 12px 28px; font-size: 16px; font-family: 'Georgia', serif;
-            cursor: pointer; border-radius: 25px; transition: all 0.3s ease;
-            letter-spacing: 1px;
+
+        .nav-link {
+            background: none; border: none;
+            color: #f0c975; font-size: 28px; font-style: italic;
+            font-family: 'Cormorant Garamond', 'Georgia', serif;
+            cursor: pointer; transition: all 0.3s ease;
+            padding: 5px 15px; text-decoration: none;
         }
-        .nav-btn:hover {
-            background: #1e2942; border-color: #ffd700; color: #fff;
-            transform: translateY(-2px); box-shadow: 0 4px 15px rgba(230, 194, 0, 0.2);
+
+        .nav-link:hover {
+            color: #ffffff; text-shadow: 0 0 12px rgba(240, 201, 117, 0.6);
+            transform: translateY(-2px);
         }
 
         /* --- PLAYER VIDEO & CUPRINS --- */
@@ -77,8 +89,8 @@
             padding: 30px; overflow-y: auto; text-align: left;
         }
         .toc-page-content h2 { 
-            text-align: center; color: #f3e5ab; margin-top: 0; 
-            font-size: 26px; border-bottom: 1px solid #222; padding-bottom: 15px; 
+            text-align: center; color: #f0c975; margin-top: 0; 
+            font-size: 32px; border-bottom: 1px solid #222; padding-bottom: 15px; font-style: italic;
         }
         .toc-grid { 
             display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; 
@@ -86,9 +98,9 @@
         .toc-item {
             background: rgba(255,255,255,0.03); padding: 8px 12px; border-radius: 6px;
             cursor: pointer; display: flex; justify-content: space-between; transition: background 0.2s;
-            font-size: 15px; border-bottom: 1px dashed #222; color: #ccc;
+            font-size: 18px; font-style: italic; border-bottom: 1px dashed #222; color: #ccc;
         }
-        .toc-item:hover { background: rgba(255,215,0,0.1); color: #ffd700; }
+        .toc-item:hover { background: rgba(240,201,117,0.1); color: #f0c975; }
 
         .controls {
             display: flex; gap: 15px; align-items: center; flex-wrap: wrap; justify-content: center;
@@ -97,11 +109,11 @@
         }
         button, select {
             background-color: #121826; color: #fff; border: 1px solid #2b3854;
-            padding: 8px 16px; font-size: 15px; cursor: pointer; border-radius: 20px; outline: none;
-            font-family: 'Georgia', serif;
+            padding: 8px 18px; font-size: 16px; cursor: pointer; border-radius: 20px; outline: none;
+            font-family: 'Cormorant Garamond', 'Georgia', serif; font-style: italic;
         }
-        button:hover, select:hover { background-color: #444; border-color: #ffd700; }
-        .page-indicator { font-size: 15px; min-width: 130px; text-align: center; color: #bbb; }
+        button:hover, select:hover { background-color: #1e2942; border-color: #f0c975; }
+        .page-indicator { font-size: 18px; font-style: italic; min-width: 130px; text-align: center; color: #bbb; }
 
         /* --- SECȚIUNI SECUNDARE --- */
         .sub-section {
@@ -109,76 +121,31 @@
             background: #0d111a; border: 1px solid #1f293d; border-radius: 10px;
             padding: 40px; overflow-y: auto; text-align: left; position: relative;
         }
-        .sub-section h2 { font-size: 28px; border-bottom: 1px solid #222; padding-bottom: 12px; margin-top: 0; color: #f3e5ab; }
+        .sub-section h2 { font-size: 32px; border-bottom: 1px solid #222; padding-bottom: 12px; margin-top: 0; color: #f0c975; font-style: italic; }
         .back-home-btn {
             margin-bottom: 20px; background: #121826; border: 1px solid #2b3854; color: #ccc;
-            padding: 6px 16px; border-radius: 15px; cursor: pointer; font-size: 14px;
+            padding: 6px 16px; border-radius: 15px; cursor: pointer; font-size: 16px; font-style: italic;
         }
-        .back-home-btn:hover { background: #1e2942; color: #fff; }
+        .back-home-btn:hover { background: #1e2942; color: #fff; border-color: #f0c975; }
     </style>
 </head>
 <body>
 
-    <!-- PAGINA DE ÎNTÂMPINARE -->
+    <!-- PAGINA DE ÎNTÂMPINARE (EXACT CA ÎN IMAGINE) -->
     <div id="landingPage">
         <h1 class="landing-title">Sufletul țărmurilor</h1>
         
         <div class="artwork-container">
-            <!-- Amonitul pictural rotit 90 grade spre stânga (cu capătul în sus) -->
-            <svg class="oil-art" viewBox="0 0 1000 580" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <filter id="oilStrokes" x="-10%" y="-10%" width="120%" height="120%">
-                        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise" />
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" />
-                    </filter>
-                </defs>
-                <rect width="1000" height="580" fill="#121215"/>
-                <g filter="url(#oilStrokes)">
-                    <!-- Fundal tușe în ulei întunecate -->
-                    <path d="M0,0 L1000,0 L1000,580 L0,580 Z" fill="#161619"/>
-                    <path d="M 50,50 Q 300,100 500,50 Q 800,20 950,100" stroke="#1d1d22" stroke-width="60" fill="none" opacity="0.7"/>
-                    <path d="M 0,400 Q 400,500 700,450 Q 900,420 1000,500" stroke="#1a1a20" stroke-width="80" fill="none" opacity="0.8"/>
-                    
-                    <!-- AMONITUL PICTURAL ROTIT (CORECTAT CU CAPĂTUL ÎN SUS) -->
-                    <!-- Baza și cochilia spiralată -->
-                    <g transform="translate(500, 290)">
-                        <!-- Umbră profundă fosilă -->
-                        <path d="M -13,-143 C 95,-132 155,-55 145,45 C 135,135 45,175 -55,145 C -125,125 -165,65 -160,-25 C -155,-95 -105,-138 -13,-143 Z" fill="#1a120b" opacity="0.9"/>
-                        
-                        <!-- Corpul principal al amonitului în tonuri calde de pământ și ocru (în ulei) -->
-                        <path d="M -10,-135 C 90,-125 145,-50 135,40 C 125,125 40,165 -50,135 C -115,115 -155,55 -150,-20 C -145,-85 -100,-130 -10,-135 Z" 
-                              fill="#4a3321" stroke="#8c6239" stroke-width="12" stroke-linejoin="round"/>
-                        
-                        <!-- Lobi și camere septale sculptate prin tușe de vopsea -->
-                        <path d="M -10,-135 C 20,-115 70,-90 95,-35" stroke="#b89762" stroke-width="14" fill="none" stroke-linecap="round"/>
-                        <path d="M 95,-35 C 120,20 120,80 70,120" stroke="#a3824f" stroke-width="12" fill="none" stroke-linecap="round"/>
-                        <path d="M 70,120 C 20,150 -40,140 -80,100" stroke="#7a5b33" stroke-width="12" fill="none" stroke-linecap="round"/>
-                        <path d="M -80,100 C -120,60 -135,0 -125,-50" stroke="#5e4425" stroke-width="12" fill="none" stroke-linecap="round"/>
-                        <path d="M -125,-50 C -115,-95 -75,-125 -10,-135" stroke="#6b4e2a" stroke-width="10" fill="none" stroke-linecap="round"/>
-
-                        <!-- Detalii fine și nervuri radiale -->
-                        <path d="M -10,-135 L -10,-35" stroke="#2d1e13" stroke-width="5"/>
-                        <path d="M 40,-95 L 15,-25" stroke="#2d1e13" stroke-width="5"/>
-                        <path d="M 110,-40 L 45,-15" stroke="#2d1e13" stroke-width="5"/>
-                        <path d="M 135,40 L 60,10" stroke="#2d1e13" stroke-width="5"/>
-                        <path d="M 90,110 L 40,25" stroke="#2d1e13" stroke-width="5"/>
-                        <path d="M 20,145 L 10,40" stroke="#2d1e13" stroke-width="5"/>
-                        <path d="M -60,130 L -15,45" stroke="#2d1e13" stroke-width="5"/>
-                        <path d="M -120,85 L -35,50" stroke="#2d1e13" stroke-width="5"/>
-                        <path d="M -140,15 L -55,55" stroke="#2d1e13" stroke-width="5"/>
-
-                        <!-- Centrul / Umbilicul spiralat -->
-                        <circle cx="-10" cy="-35" r="16" fill="#1c1209" stroke="#d4af37" stroke-width="4"/>
-                        <path d="M -10,-35 Q -3,-42 2,-32 Q 5,-22 -5,-20" fill="none" stroke="#ffe875" stroke-width="3"/>
-                    </g>
-                </g>
-            </svg>
+            <!-- Asigură-te că imaginea ta se numește ammonite-landing.jpg pe GitHub -->
+            <img src="ammonite-landing.jpg" alt="Amonit - Vlad Opran" class="artwork-img" />
         </div>
 
+        <div class="author-name">Vlad Opran</div>
+
         <div class="landing-nav">
-            <button class="nav-btn" onclick="showSection('aboutSection')">Despre autor</button>
-            <button class="nav-btn" onclick="showBookApp()">Redă</button>
-            <button class="nav-btn" onclick="showSection('librarySection')">Bibliotecă</button>
+            <button class="nav-link" onclick="showSection('aboutSection')">Despre autor</button>
+            <button class="nav-link" onclick="showBookApp()">Redă</button>
+            <button class="nav-link" onclick="showSection('librarySection')">Bibliotecă</button>
         </div>
     </div>
 
@@ -186,7 +153,7 @@
     <div id="aboutSection" class="sub-section">
         <button class="back-home-btn" onclick="showLanding()">❮ Înapoi</button>
         <h2>Despre autor</h2>
-        <!-- Spațiu liber pregătit pentru textul tău personalizat -->
+        <!-- Spațiu liber rezervat pentru textul tău -->
     </div>
 
     <!-- SECȚIUNEA: BIBLIOTECĂ -->
@@ -202,7 +169,6 @@
         <button class="back-home-btn" onclick="showLanding()" style="align-self: flex-start; margin-bottom: 10px;">❮ Înapoi la început</button>
         
         <div class="book-container">
-            <!-- Player video cu controale native complete -->
             <video id="pageVideo" class="book-video" controls playsinline preload="auto"></video>
             <div id="tocContentDiv" class="toc-page-content">
                 <h2>CUPRINS</h2>
