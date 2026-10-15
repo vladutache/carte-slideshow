@@ -24,7 +24,6 @@
             padding: 0; margin: 0; position: relative;
         }
 
-        /* Containerul imaginii devine referință pentru butoanele suprapuse */
         .artwork-container {
             position: relative;
             display: inline-block;
@@ -39,28 +38,28 @@
             display: block;
         }
 
-        /* Meniul suprapus direct pe partea de jos a imaginii, sub Vlad Opran */
+        /* Meniul suprapus direct pe imagine, cu un scris mai generos și elegant */
         .landing-nav {
             position: absolute;
-            bottom: 4%; /* reglează acest procentaj dacă vrei mai sus sau mai jos pe imagine */
+            bottom: 4%;
             left: 50%;
             transform: translateX(-50%);
-            display: flex; gap: 40px; justify-content: center; align-items: center;
+            display: flex; gap: 45px; justify-content: center; align-items: center;
             width: 100%;
         }
 
         .nav-link {
             background: none; border: none;
-            color: #f0c975; font-size: 24px; font-style: italic;
+            color: #f0c975; font-size: 30px; font-style: italic;
             font-family: 'Cormorant Garamond', 'Georgia', serif;
             cursor: pointer; transition: all 0.3s ease;
             padding: 5px 10px; text-decoration: none;
             letter-spacing: 1px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
         }
 
         .nav-link:hover {
-            color: #ffffff; text-shadow: 0 0 12px rgba(240, 201, 117, 0.8);
+            color: #ffffff; text-shadow: 0 0 15px rgba(240, 201, 117, 0.9);
             transform: translateY(-2px);
         }
 
@@ -131,10 +130,8 @@
     <!-- PAGINA DE ÎNTÂMPINARE -->
     <div id="landingPage">
         <div class="artwork-container">
-            <!-- Imaginea curată cu Vlad Opran la bază -->
             <img src="ammonite-landing.jpg" alt="Sufletul țărmurilor — Vlad Opran" class="artwork-img" />
             
-            <!-- Rubricile poziționate direct pe imagine, sub Vlad Opran -->
             <div class="landing-nav">
                 <button class="nav-link" onclick="showSection('aboutSection')">Despre autor</button>
                 <button class="nav-link" onclick="showBookApp()">Redă</button>
@@ -147,7 +144,6 @@
     <div id="aboutSection" class="sub-section">
         <button class="back-home-btn" onclick="showLanding()">❮ Înapoi</button>
         <h2>Despre autor</h2>
-        <!-- Spațiu liber rezervat pentru textul tău -->
     </div>
 
     <!-- SECȚIUNEA: BIBLIOTECĂ -->
