@@ -74,6 +74,30 @@
             color: #ffffff; text-shadow: 0 0 15px rgba(240, 201, 117, 0.9);
             transform: translateY(-2px);
         }
+            /* --- REGULI ADAPTARE MOBIL (TELEFOANE) --- */
+        @media (max-width: 768px) {
+            .landing-nav {
+                bottom: 3.5%;
+                gap: 15px;
+            }
+            .nav-link {
+                font-size: 20px;
+                padding: 3px 6px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .landing-nav {
+                bottom: 3%;
+                gap: 8px;
+            }
+            .nav-link {
+                font-size: 17px;
+                padding: 2px 4px;
+                letter-spacing: 0.5px;
+            }
+        }
+        }
 
         /* --- PLAYER VIDEO & CUPRINS --- */
         #bookApp {
