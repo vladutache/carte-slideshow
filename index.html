@@ -37,6 +37,7 @@
         .oil-art {
             max-height: 100%; max-width: 100%; object-fit: contain;
             filter: drop-shadow(0 0 25px rgba(230, 194, 0, 0.15));
+            border-radius: 6px;
         }
 
         .landing-nav {
@@ -99,7 +100,7 @@
             padding: 8px 16px; font-size: 15px; cursor: pointer; border-radius: 20px; outline: none;
             font-family: 'Georgia', serif;
         }
-        button:hover, select:hover { background-color: #1e2942; border-color: #ffd700; }
+        button:hover, select:hover { background-color: #444; border-color: #ffd700; }
         .page-indicator { font-size: 15px; min-width: 130px; text-align: center; color: #bbb; }
 
         /* --- SECȚIUNI SECUNDARE --- */
@@ -123,104 +124,52 @@
         <h1 class="landing-title">Sufletul țărmurilor</h1>
         
         <div class="artwork-container">
-            <!-- PICTURĂ IMPRESIONISTĂ (TUȘE PROEMINENTE, LUNĂ AURIE SPRE STÂNGA, POET PR PRIVITOR, VALURI) -->
-            <svg class="oil-art" viewBox="0 0 1000 700" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <!-- Amonitul pictural rotit 90 grade spre stânga (cu capătul în sus) -->
+            <svg class="oil-art" viewBox="0 0 1000 580" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                    <!-- Filtru de tușe groase de vopsea în ulei -->
                     <filter id="oilStrokes" x="-10%" y="-10%" width="120%" height="120%">
                         <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise" />
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="7" xChannelSelector="R" yChannelSelector="G" />
+                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" />
                     </filter>
-                    
-                    <!-- Strălucire caldă aurie -->
-                    <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#ffe875" stop-opacity="0.35"/>
-                        <stop offset="50%" stop-color="#ffb700" stop-opacity="0.15"/>
-                        <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
-                    </radialGradient>
                 </defs>
-
-                <!-- Fundal: Cer de noapte impresionist în tușe de albastru/purpuriu -->
-                <rect width="1000" height="700" fill="#060913"/>
-                
+                <rect width="1000" height="580" fill="#121215"/>
                 <g filter="url(#oilStrokes)">
-                    <!-- Tușe cer de noapte Van Gogh style -->
-                    <path d="M0,0 L1000,0 L1000,480 L0,480 Z" fill="#0a1024"/>
-                    <path d="M 50,50 Q 250,20 500,80 Q 750,140 950,60" stroke="#121d3b" stroke-width="40" fill="none" opacity="0.8"/>
-                    <path d="M 0,150 Q 300,200 600,120 Q 800,80 1000,180" stroke="#1a274c" stroke-width="50" fill="none" opacity="0.7"/>
-                    <path d="M 100,280 Q 400,220 700,310 Q 850,280 1000,320" stroke="#141c36" stroke-width="45" fill="none" opacity="0.9"/>
-
-                    <!-- Stele impresioniste (vârtojuri de gălbui și albastru) -->
-                    <g fill="none" stroke-linecap="round">
-                        <circle cx="180" cy="100" r="12" stroke="#ffe066" stroke-width="4" opacity="0.8"/>
-                        <circle cx="180" cy="100" r="4" fill="#ffffff"/>
-                        
-                        <circle cx="820" cy="110" r="15" stroke="#ffd11a" stroke-width="5" opacity="0.8"/>
-                        <circle cx="820" cy="110" r="5" fill="#ffffff"/>
-
-                        <circle cx="700" cy="220" r="10" stroke="#ffeb99" stroke-width="3" opacity="0.7"/>
-                        <circle cx="300" cy="240" r="8" stroke="#ffe066" stroke-width="3" opacity="0.6"/>
-                    </g>
-
-                    <!-- Halou auriu masiv în spatele lunii -->
-                    <circle cx="500" cy="260" r="230" fill="url(#goldGlow)"/>
-
-                    <!-- LUNA AURIE ÎN CREȘTERE (CAVITATEA / ORIENTAREA SPRE STÂNGA) -->
-                    <!-- Exterior auriu aprins -->
-                    <path d="M 460,80 C 620,130 650,370 480,480 C 680,420 680,140 460,80 Z" 
-                          fill="#ffcc00" stroke="#ffe875" stroke-width="6" stroke-linejoin="round"/>
+                    <!-- Fundal tușe în ulei întunecate -->
+                    <path d="M0,0 L1000,0 L1000,580 L0,580 Z" fill="#161619"/>
+                    <path d="M 50,50 Q 300,100 500,50 Q 800,20 950,100" stroke="#1d1d22" stroke-width="60" fill="none" opacity="0.7"/>
+                    <path d="M 0,400 Q 400,500 700,450 Q 900,420 1000,500" stroke="#1a1a20" stroke-width="80" fill="none" opacity="0.8"/>
                     
-                    <!-- Tușe interioare de vopsea pe semilună (textură bogată de aur) -->
-                    <path d="M 480,110 C 600,160 620,350 500,450" stroke="#ffaa00" stroke-width="12" fill="none" opacity="0.8"/>
-                    <path d="M 510,140 C 610,200 610,320 520,420" stroke="#e69900" stroke-width="10" fill="none" opacity="0.7"/>
-                    <path d="M 540,180 C 600,230 600,290 540,380" stroke="#fff0aa" stroke-width="8" fill="none" opacity="0.9"/>
-
-                    <!-- POETUL SENSIBIL AȘEZAT ÎN CORNUL LUNII (PRIVIND SPRE NOI / SPRE STÂNGA-JOS) -->
-                    <g opacity="0.95">
-                        <!-- Haină lungă, romantică în tonuri de teracotă și vișiniu (stil impresionist) -->
-                        <path d="M 530,310 C 500,330 470,380 460,430 C 490,440 520,420 545,390 C 555,360 550,330 530,310 Z" 
-                              fill="#6b2d39" stroke="#8c3f4f" stroke-width="4"/>
-                        <path d="M 480,360 Q 510,390 530,415" stroke="#a84e60" stroke-width="5" fill="none"/>
-
-                        <!-- Capul întors spre noi/profil stânga, păr boem fin -->
-                        <circle cx="530" cy="280" r="16" fill="#fce0d4"/> <!-- Chip iluminat -->
-                        <path d="M 520,265 C 505,270 515,295 520,300" stroke="#3b2319" stroke-width="5" fill="none"/> <!-- Plete scurte/medii -->
-                        <path d="M 525,264 C 540,260 545,275 540,290" fill="#4a2e21"/> <!-- Păr pe spate -->
-
-                        <!-- Brațul sprijinit delicat pe genunchi -->
-                        <path d="M 525,315 Q 500,340 495,365" stroke="#fce0d4" stroke-width="6" fill="none" stroke-linecap="round"/>
-                        <path d="M 525,315 Q 500,340 495,365" stroke="#6b2d39" stroke-width="10" fill="none" opacity="0.5"/>
-
-                        <!-- Picioarele lăsate relaxat pe marginea lunii -->
-                        <path d="M 480,410 L 450,470 L 435,520" stroke="#2b354d" stroke-width="9" fill="none" stroke-linecap="round"/>
-                        <path d="M 495,410 L 470,475 L 460,525" stroke="#1d2538" stroke-width="8" fill="none" stroke-linecap="round"/>
-                    </g>
-
-                    <!-- MAREA IMPRESIONISTĂ ȘI VALURILE CU REFLEXII AURII -->
-                    <!-- Baza mării -->
-                    <rect x="0" y="470" width="1000" height="230" fill="#081021"/>
-                    
-                    <!-- Tușe orizontale proeminente de valuri (Albastru cobalt, turcoaz și aur) -->
-                    <g stroke-linecap="round">
-                        <!-- Valuri de adâncime -->
-                        <path d="M 0,490 Q 250,510 500,485 Q 750,510 1000,490" stroke="#0e1a38" stroke-width="12" fill="none"/>
-                        <path d="M 50,520 Q 300,500 600,530 Q 800,505 950,525" stroke="#13244d" stroke-width="14" fill="none"/>
+                    <!-- AMONITUL PICTURAL ROTIT (CORECTAT CU CAPĂTUL ÎN SUS) -->
+                    <!-- Baza și cochilia spiralată -->
+                    <g transform="translate(500, 290)">
+                        <!-- Umbră profundă fosilă -->
+                        <path d="M -13,-143 C 95,-132 155,-55 145,45 C 135,135 45,175 -55,145 C -125,125 -165,65 -160,-25 C -155,-95 -105,-138 -13,-143 Z" fill="#1a120b" opacity="0.9"/>
                         
-                        <!-- REFLEXII AURII MASIVE DE LA LUNĂ PE MARE -->
-                        <path d="M 420,500 L 560,500" stroke="#ffd700" stroke-width="6" opacity="0.9"/>
-                        <path d="M 380,520 L 600,520" stroke="#ffcc00" stroke-width="8" opacity="0.85"/>
-                        <path d="M 430,535 L 530,535" stroke="#ffe875" stroke-width="5" opacity="0.9"/>
-                        <path d="M 340,550 L 640,550" stroke="#e6b800" stroke-width="10" opacity="0.8"/>
-                        <path d="M 400,570 L 580,570" stroke="#ffd700" stroke-width="7" opacity="0.75"/>
-                        <path d="M 300,595 L 680,595" stroke="#ffaa00" stroke-width="12" opacity="0.7"/>
-                        <path d="M 360,620 L 620,620" stroke="#e69900" stroke-width="8" opacity="0.6"/>
-                        <path d="M 250,650 L 720,650" stroke="#d48800" stroke-width="14" opacity="0.5"/>
+                        <!-- Corpul principal al amonitului în tonuri calde de pământ și ocru (în ulei) -->
+                        <path d="M -10,-135 C 90,-125 145,-50 135,40 C 125,125 40,165 -50,135 C -115,115 -155,55 -150,-20 C -145,-85 -100,-130 -10,-135 Z" 
+                              fill="#4a3321" stroke="#8c6239" stroke-width="12" stroke-linejoin="round"/>
+                        
+                        <!-- Lobi și camere septale sculptate prin tușe de vopsea -->
+                        <path d="M -10,-135 C 20,-115 70,-90 95,-35" stroke="#b89762" stroke-width="14" fill="none" stroke-linecap="round"/>
+                        <path d="M 95,-35 C 120,20 120,80 70,120" stroke="#a3824f" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <path d="M 70,120 C 20,150 -40,140 -80,100" stroke="#7a5b33" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <path d="M -80,100 C -120,60 -135,0 -125,-50" stroke="#5e4425" stroke-width="12" fill="none" stroke-linecap="round"/>
+                        <path d="M -125,-50 C -115,-95 -75,-125 -10,-135" stroke="#6b4e2a" stroke-width="10" fill="none" stroke-linecap="round"/>
 
-                        <!-- Valuri secundare cu spumă turcoaz/argintie -->
-                        <path d="M 20,560 Q 200,540 350,565" stroke="#1a3d66" stroke-width="8" fill="none"/>
-                        <path d="M 680,560 Q 850,580 980,550" stroke="#1a3d66" stroke-width="8" fill="none"/>
-                        <path d="M 100,610 Q 280,630 400,605" stroke="#245285" stroke-width="6" fill="none" opacity="0.6"/>
-                        <path d="M 600,625 Q 780,600 920,630" stroke="#245285" stroke-width="6" fill="none" opacity="0.6"/>
+                        <!-- Detalii fine și nervuri radiale -->
+                        <path d="M -10,-135 L -10,-35" stroke="#2d1e13" stroke-width="5"/>
+                        <path d="M 40,-95 L 15,-25" stroke="#2d1e13" stroke-width="5"/>
+                        <path d="M 110,-40 L 45,-15" stroke="#2d1e13" stroke-width="5"/>
+                        <path d="M 135,40 L 60,10" stroke="#2d1e13" stroke-width="5"/>
+                        <path d="M 90,110 L 40,25" stroke="#2d1e13" stroke-width="5"/>
+                        <path d="M 20,145 L 10,40" stroke="#2d1e13" stroke-width="5"/>
+                        <path d="M -60,130 L -15,45" stroke="#2d1e13" stroke-width="5"/>
+                        <path d="M -120,85 L -35,50" stroke="#2d1e13" stroke-width="5"/>
+                        <path d="M -140,15 L -55,55" stroke="#2d1e13" stroke-width="5"/>
+
+                        <!-- Centrul / Umbilicul spiralat -->
+                        <circle cx="-10" cy="-35" r="16" fill="#1c1209" stroke="#d4af37" stroke-width="4"/>
+                        <path d="M -10,-35 Q -3,-42 2,-32 Q 5,-22 -5,-20" fill="none" stroke="#ffe875" stroke-width="3"/>
                     </g>
                 </g>
             </svg>
@@ -237,8 +186,7 @@
     <div id="aboutSection" class="sub-section">
         <button class="back-home-btn" onclick="showLanding()">❮ Înapoi</button>
         <h2>Despre autor</h2>
-        <p>Vlad Opran este un autor și poet preocupat de armonia clasică a formelor, versul măsurat și nuanțele subtile ale imagisticii urbane și nocturne.</p>
-        <p>Volumul „Sufletul țărmurilor” reunește o serie de meditații lirice transpuse în imagini și sunet.</p>
+        <!-- Spațiu liber pregătit pentru textul tău personalizat -->
     </div>
 
     <!-- SECȚIUNEA: BIBLIOTECĂ -->
@@ -254,7 +202,7 @@
         <button class="back-home-btn" onclick="showLanding()" style="align-self: flex-start; margin-bottom: 10px;">❮ Înapoi la început</button>
         
         <div class="book-container">
-            <!-- Player video cu controale native complete (Pauză, Play, Volum, Bară de timp) -->
+            <!-- Player video cu controale native complete -->
             <video id="pageVideo" class="book-video" controls playsinline preload="auto"></video>
             <div id="tocContentDiv" class="toc-page-content">
                 <h2>CUPRINS</h2>
